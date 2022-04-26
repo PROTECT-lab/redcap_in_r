@@ -3,7 +3,8 @@ bsrc.score<-function(df=NULL,formname=NULL,...){
   library(dplyr)
   possible_forms<-c("ssi","sis","athf","ham","cirsg","sidp","exit","drs","wtar","mmse","ars",
                     "bis","ctq","isel","iip","ta","neo","paibor","spsi","ssd","uppsp","fs", "let", 
-                    "swls","maas","ah","bsia","cfcs", "ders", "iri", "nfc", "rand12", "bpni" ,"bhs","ipipds")
+                    "swls","maas","ah","bsia","cfcs", "ders", "iri", "nfc", "rand12", "bpni" ,"bhs","ipipds",
+                    "bipa","dws","es","ffni","icg","ius","narq","pid5","mfq","rrs","sm")
   if(is.null(formname)){
     message("No form name supplied, choose one of these options:")
     print(possible_forms)
@@ -606,7 +607,8 @@ score.fs <- function(df=NULL){
   paste0("fs_",1:8)->names(df)[names(df) %in% c("fs_purpose","fs_rewarding_relationships","fs_engaged","fs_contribute","fs_competent","fs_goodperson","fs_optimistic","fs_respect")]
   
   df <- df %>% 
-    mutate_at(vars(paste0("fs_",c(1:8))),as.numeric)%>% 
+    mutate_at(vars(paste0("fs_",c(1:8))),as.numeric)
+  df <- df %>% 
     mutate(fs_total= ifelse(rowSums(is.na(df[paste0("fs_",c(1:8))]))==0,rowSums(df[paste0("fs_",c(1:8))]), NA))
   return(df)
 }
@@ -647,7 +649,8 @@ score.maas <- function(df=NULL){
 
 #ah scoring
 score.ah <- function(df=NULL){
-  df <- df %>% mutate_at(vars(paste0("ah_",c(1:14))),as.numeric)%>% 
+  df <- df %>% mutate_at(vars(paste0("ah_",c(1:14))),as.numeric)
+  df <- df %>% 
     mutate(ah_total=ifelse(rowSums(is.na(df[paste0("ah_",c(1:14))]))==0,
                            rowSums(df[paste0("ah_",c(1:14))]),ifelse(
                              rowSums(is.na(df[paste0("ah_",c(1:14))]))==1,
@@ -658,7 +661,8 @@ score.ah <- function(df=NULL){
 
 #BSIA scoring
 score.bsia <- function (df=NULL){
-  df <- df %>% mutate_at(vars(paste0("bsi_a_",c(1:6))),as.numeric)%>% 
+  df <- df %>% mutate_at(vars(paste0("bsi_a_",c(1:6))),as.numeric)
+  df <- df %>% 
     mutate(bsia_total=ifelse(rowSums(is.na(df[paste0("bsi_a_",c(1:6))]))==0,
                              rowSums(df[paste0("bsi_a_",c(1:6))]),ifelse(
                                rowSums(is.na(df[paste0("bsi_a_",c(1:6))]))==1,
@@ -669,7 +673,8 @@ score.bsia <- function (df=NULL){
 
 #CFCS scoring
 score.cfcs <- function (df=NULL){
-  df <- df %>% mutate_at(vars(paste0("cfcs_",c(1:12))),as.numeric)%>% 
+  df <- df %>% mutate_at(vars(paste0("cfcs_",c(1:12))),as.numeric)
+  df <- df %>% 
     mutate(cfcs_total=ifelse(rowSums(is.na(df[paste0("cfcs_",c(1:12))]))==0,
                              rowSums(df[paste0("cfcs_",c(1:12))]),ifelse(
                                rowSums(is.na(df[paste0("cfcs_",c(1:12))]))==1,
@@ -752,7 +757,8 @@ score.iri <- function (df=NULL) {
 
 #NFC scoring
 score.nfc <- function (df=NULL) {
-  df <- df %>% mutate_at(vars(paste0("nfc_",c(1:15))),as.numeric)%>% 
+  df <- df %>% mutate_at(vars(paste0("nfc_",c(1:15))),as.numeric)
+  df<-df %>% 
     mutate(nfc_total=ifelse(rowSums(is.na(df[paste0("nfc_",c(1:15))]))==0,
                             rowSums(df[paste0("nfc_",c(1:15))]),ifelse(
                               rowSums(is.na(df[paste0("nfc_",c(1:15))]))==1,
@@ -868,7 +874,8 @@ score.rand12 <- function (df=NULL){
 
 #BPNI scoring
 score.bpni <- function(df=NULL){
-  df <- df %>% mutate_at(vars(paste0("bpni_",c(1:28))),as.numeric)%>% 
+  df <- df %>% mutate_at(vars(paste0("bpni_",c(1:28))),as.numeric)
+  df<-df %>% 
     mutate(bpni_exploit = ifelse(rowSums(is.na(df[paste0("bpni_", c(1,4,6,11))]))==0, 
                                  rowSums(df[paste0("bpni_", c(1,4,6,11))]),NA),
            bpni_enhancement = ifelse(rowSums(is.na(df[paste0("bpni_", c(10,12,19,24))]))==0, 
@@ -905,6 +912,7 @@ return(df)
 #ipipds scoring
 
 score.ipipds <- function(df=NULL){
+  df<-df %>% mutate_at(vars(paste0("ipipds_",c(1:11))),as.numeric)
   df <- df %>% mutate(
     ipipds_total=ifelse(rowSums(is.na(df[paste0("ipipds_",c(1:11))]))==0,
                         rowSums(df[paste0("ipipds_",c(1:11))]),ifelse(
@@ -912,3 +920,301 @@ score.ipipds <- function(df=NULL){
                           round(rowSums(df[paste0("ipipds_",c(1:11))],na.rm=T)*11/10),NA)))
   return(df)
 }
+
+#bipa scoring
+score.bipa <- function(df=NULL){
+  df<-df %>% mutate_at(vars(paste0("bipa_",c(1:24))),as.numeric)%>%
+    mutate(bipa_1r=5-bipa_1, bipa_3r=5-bipa_3,bipa_4r=5-bipa_4,
+           bipa_5r=5-bipa_5, bipa_6r=5-bipa_6,bipa_7r=5-bipa_7,
+           bipa_8r=5-bipa_8,bipa_9r=5-bipa_9,bipa_10r=5-bipa_10,
+           bipa_11r=5-bipa_11,bipa_12r=5-bipa_12, bipa_13r=5-bipa_12, 
+           bipa_14r=5-bipa_14,bipa_15r=5-bipa_15,bipa_16r=5-bipa_16, 
+           bipa_17r=5-bipa_17,bipa_18r=5-bipa_18, bipa_19r=5-bipa_19, 
+           bipa_20r=5-bipa_20,bipa_21r=5-bipa_21, bipa_23r=5-bipa_23, 
+           bipa_24r=5-bipa_24)
+  
+ 
+  df<-df %>% 
+    mutate(bipa_drive = ifelse(rowSums(is.na(df[paste0("bipa_", c("3r","9r","12r","21r"))]))==0, 
+                                 rowSums(df[paste0("bipa_", c("3r","9r","12r","21r"))]),NA),
+           bipa_fun_seek = ifelse(rowSums(is.na(df[paste0("bipa_", c("5r","10r","15r","20r"))]))==0, 
+                                     rowSums(df[paste0("bipa_", c("5r","10r","15r","20r"))]),NA),
+           bipa_rerward_res = ifelse(rowSums(is.na(df[paste0("bipa_", c("4r","7r","14r","18r","23r"))]))==0, 
+                                     rowSums(df[paste0("bipa_", c("4r","7r","14r","18r","23r"))]),NA),
+           bipa_bis = ifelse(rowSums(is.na(df[paste0("bipa_", c(2,"8r","13r","16r","19r",22,"24r"))]))==0, 
+                                rowSums(df[paste0("bipa_", c(2,"8r","13r","16r","19r",22,"24r"))]),NA)
+    )
+  return(df)
+  
+}
+
+#dws scoring
+score.dws <- function(df=NULL){
+  df<-df %>% mutate_at(vars(paste0("dws12_",c(1:12))),as.numeric)
+  
+df <-df %>%
+  mutate (dws_total=ifelse(rowSums(is.na(df[paste0("dws12_",c(1:12))]))==0,
+                              rowSums(df[paste0("dws12_",c(1:12))]),ifelse(
+                                rowSums(is.na(df[paste0("dws12_",c(1:12))]))==1,
+                                round(rowSums(df[paste0("dws12_",c(1:12))],na.rm=T)*12/11),NA)))
+return(df)
+}
+
+#es scoring 
+score.es <- function(df=NULL){
+  df<-df %>% mutate_at(vars(paste0("es_",c(1:16))),as.numeric)
+  
+  df <-df %>%
+    mutate (es_external=ifelse(rowSums(is.na(df[paste0("es_",c(1:10))]))==0,
+                             rowSums(df[paste0("es_",c(1:10))]),ifelse(
+                               rowSums(is.na(df[paste0("es_",c(1:10))]))==1,
+                               round(rowSums(df[paste0("es_",c(1:10))],na.rm=T)*10/10),NA)),
+            es_internal=ifelse(rowSums(is.na(df[paste0("es_", c(11:16))]))==0, 
+                               rowSums(df[paste0("es_", c(11:16))]),NA),
+            es_total=ifelse(rowSums(is.na(df[paste0("es_",c(1:16))]))==0,
+                               rowSums(df[paste0("es_",c(1:16))]),ifelse(
+                                 rowSums(is.na(df[paste0("es_",c(1:16))]))==1,
+                                 round(rowSums(df[paste0("es_",c(1:16))],na.rm=T)*16/10),NA)))
+
+  return(df)
+}
+
+#ffni scoring
+score.ffni <- function(df=NULL){
+  df<-df %>% mutate_at(vars(paste0("ffni_",c(1:60))),as.numeric)%>%
+    mutate(ffni_19r=6-ffni_19,ffni_38r=6-ffni_38, ffni_27r=6-ffni_27,
+           ffni_9r=6-ffni_9,ffni_24r=6-ffni_24, ffni_39r=6-ffni_39, ffni_54r=6-ffni_54)
+    
+  df <-df %>%
+    mutate (ffni_acclaim = ifelse(rowSums(is.na(df[paste0("ffni_", c(1,16,31,46))]))==0, 
+                                  rowSums(df[paste0("ffni_", c(1,16,31,46))]),NA),
+            ffni_arrogance = ifelse(rowSums(is.na(df[paste0("ffni_", c(2,17,32,47))]))==0, 
+                                      rowSums(df[paste0("ffni_", c(2,17,32,47))]),NA),
+            ffni_author = ifelse(rowSums(is.na(df[paste0("ffni_", c(3,18,33,48))]))==0, 
+                                      rowSums(df[paste0("ffni_", c(3,18,33,48))]),NA),
+            ffni_distrust = ifelse(rowSums(is.na(df[paste0("ffni_", c(4,"19r",34,49))]))==0, 
+                                 rowSums(df[paste0("ffni_", c(4,"19r",34,49))]),NA),
+            ffni_entitle = ifelse(rowSums(is.na(df[paste0("ffni_", c(5,20,35,50))]))==0, 
+                                 rowSums(df[paste0("ffni_", c(5,20,35,50))]),NA),
+            ffni_exhibit = ifelse(rowSums(is.na(df[paste0("ffni_", c(6,21,36,51))]))==0, 
+                                    rowSums(df[paste0("ffni_", c(6,21,36,51))]),NA),
+            ffni_exploit = ifelse(rowSums(is.na(df[paste0("ffni_", c(7,22,37,52))]))==0, 
+                               rowSums(df[paste0("ffni_", c(7,22,37,52))]),NA),
+            ffni_grand = ifelse(rowSums(is.na(df[paste0("ffni_", c(8,23,"38r",53))]))==0, 
+                                  rowSums(df[paste0("ffni_", c(8,23,"38r",53))]),NA),
+            ffni_indifferent = ifelse(rowSums(is.na(df[paste0("ffni_", c(9,24,39,54))]))==0, 
+                                      rowSums(df[paste0("ffni_", c(9,24,39,54))]),NA),
+            ffni_empath = ifelse(rowSums(is.na(df[paste0("ffni_", c(10,25,40,55))]))==0, 
+                                      rowSums(df[paste0("ffni_", c(10,25,40,55))]),NA),
+            ffni_manipulative = ifelse(rowSums(is.na(df[paste0("ffni_", c(11,26,41,56))]))==0, 
+                                 rowSums(df[paste0("ffni_", c(11,26,41,56))]),NA),
+            ffni_admire = ifelse(rowSums(is.na(df[paste0("ffni_", c(12,"27r",42,57))]))==0, 
+                                 rowSums(df[paste0("ffni_", c(12,"27r",42,57))]),NA),
+            ffni_anger = ifelse(rowSums(is.na(df[paste0("ffni_", c(13,28,43,58))]))==0, 
+                                    rowSums(df[paste0("ffni_", c(13,28,43,58))]),NA),
+            ffni_shame = ifelse(rowSums(is.na(df[paste0("ffni_", c(14,29,44,59))]))==0, 
+                               rowSums(df[paste0("ffni_", c(14,29,44,59))]),NA),
+            ffni_thrill = ifelse(rowSums(is.na(df[paste0("ffni_", c(15,30,45,60)))]))==0, 
+                                  rowSums(df[paste0("ffni_", c(15,30,45,60))]),NA))
+
+df <-df %>%
+  mutate (ffni_antagonism=ifelse(rowSums(is.na(df[paste0("ffni_",c(11,26,41,56,7,22,37,52,5,20,35,50,10,25,40,55,2,17,32,47,13,28,43,58,4,"19r",34,49,15,30,45,60))]))==0,
+                            rowSums(df[paste0("ffni_",c(11,26,41,56,7,22,37,52,5,20,35,50,10,25,40,55,2,17,32,47,13,28,43,58,4,"19r",34,49,15,30,45,60))]),ifelse(
+                                                          rowSums(is.na(df[paste0("ffni_",c(11,26,41,56,7,22,37,52,5,20,35,50,10,25,40,55,2,17,32,47,13,28,43,58,4,"19r",34,49,15,30,45,60))]))==1,
+                                                          round(rowSums(df[paste0("ffni_",c(11,26,41,56,7,22,37,52,5,20,35,50,10,25,40,55,2,17,32,47,13,28,43,58,4,"19r",34,49,15,30,45,60))],na.rm=T)*32/31),ifelse(
+                                                                                              rowSums(is.na(df[paste0("ffni_",c(11,26,41,56,7,22,37,52,5,20,35,50,10,25,40,55,2,17,32,47,13,28,43,58,4,"19r",34,49,15,30,45,60))]))==2,
+                                                                                              round(rowSums(df[paste0("ffni_",c(11,26,41,56,7,22,37,52,5,20,35,50,10,25,40,55,2,17,32,47,13,28,43,58,4,"19r",34,49,15,30,45,60))],na.rm=T)*32/30), ifelse(
+                                                                                                                                  rowSums(is.na(df[paste0("ffni_",c(11,26,41,56,7,22,37,52,5,20,35,50,10,25,40,55,2,17,32,47,13,28,43,58,4,"19r",34,49,15,30,45,60))]))==3,
+                                                                                                                                  round(rowSums(df[paste0("ffni_",c(11,26,41,56,7,22,37,52,5,20,35,50,10,25,40,55,2,17,32,47,13,28,43,58,4,"19r",34,49,15,30,45,60))],na.rm=T)*32/29),NA)))),
+          ffni_extravert=ifelse(rowSums(is.na(df[paste0("ffni_",c(1,16,31,46,3,18,33,48,8,23,"38r",53,6,21,36,51))]))==0,
+                             rowSums(df[paste0("ffni_",c(1,16,31,46,3,18,33,48,8,23,"38r",53,6,21,36,51))]),ifelse(
+                               rowSums(is.na(df[paste0("ffni_",c(1,16,31,46,3,18,33,48,8,23,"38r",53,6,21,36,51))]))==1,
+                               round(rowSums(df[paste0("ffni_",c(1,16,31,46,3,18,33,48,8,23,"38r",53,6,21,36,51))],na.rm=T)*16/15),NA)),
+          ffni_neuro=ifelse(rowSums(is.na(df[paste0("ffni_",c(14,29,44,59,9,24,39,54,"9r","24r","39r","54r",12,"27r",42,57))]))==0,
+                                rowSums(df[paste0("ffni_",c(14,29,44,59,9,24,39,54,"9r","24r","39r","54r",12,"27r",42,57))]),ifelse(
+                                  rowSums(is.na(df[paste0("ffni_",c(14,29,44,59,9,24,39,54,"9r","24r","39r","54r",12,"27r",42,57))]))==1,
+                                  round(rowSums(df[paste0("ffni_",c(14,29,44,59,9,24,39,54,"9r","24r","39r","54r",12,"27r",42,57))],na.rm=T)*16/15),NA)),
+          ffni_grand_narciss=ifelse(rowSums(is.na(df[paste0("ffni_", c(11,26,41,56,7,22,37,52,5,20,35,50,10,25,40,55,2,17,32,47,1,16,31,46,15,30,45,60))]))==0, 
+                           rowSums(df[paste0("ffni_", c(11,26,41,56,7,22,37,52,5,20,35,50,10,25,40,55,2,17,32,47,1,16,31,46,15,30,45,60))]),
+                           ifelse(rowSums(is.na(df[paste0("ffni_", c(11,26,41,56,7,22,37,52,5,20,35,50,10,25,40,55,2,17,32,47,1,16,31,46,15,30,45,60))]))==1, 
+                                  rowSums(df[paste0("ffni_", c(11,26,41,56,7,22,37,52,5,20,35,50,10,25,40,55,2,17,32,47,1,16,31,46,15,30,45,60))])*28/27,
+                                  ifelse(rowSums(is.na(df[paste0("ffni_", c(11,26,41,56,7,22,37,52,5,20,35,50,10,25,40,55,2,17,32,47,1,16,31,46,15,30,45,60))]))==2,
+                                         rowSums(df[paste0("ffni_", c(11,26,41,56,7,22,37,52,5,20,35,50,10,25,40,55,2,17,32,47,1,16,31,46,15,30,45,60))])*28/26, NA))),
+          ffni_vul_narciss=ifelse(rowSums(is.na(df[paste0("ffni_",c(13,28,43,58,14,29,44,59,12,"27r",42,57,4,"19r",34,49))]))==0,
+                            rowSums(df[paste0("ffni_",c(13,28,43,58,14,29,44,59,12,"27r",42,57,4,"19r",34,49))]),ifelse(
+                              rowSums(is.na(df[paste0("ffni_",c(13,28,43,58,14,29,44,59,12,"27r",42,57,4,"19r",34,49))]))==1,
+                              round(rowSums(df[paste0("ffni_",c(13,28,43,58,14,29,44,59,12,"27r",42,57,4,"19r",34,49))],na.rm=T)*16/15),NA)))
+
+df <- df %>%
+  mutate (ffni_total=ifelse(rowSums(is.na(df[paste0("ffni_",c(1:18,"19r",20:26,"27r",28:37,"38r",39:60))]))==0,
+                           rowSums(df[paste0("ffni_",c(1:18,"19r",20:26,"27r",28:37,"38r",39:60))]),ifelse(
+                             rowSums(is.na(df[paste0("ffni_",c(1:18,"19r",20:26,"27r",28:37,"38r",39:60))]))==1,
+                             round(rowSums(df[paste0("ffni_",c(1:18,"19r",20:26,"27r",28:37,"38r",39:60))],na.rm=T)*60/59),ifelse(
+                               rowSums(is.na(df[paste0("ffni_",c(1:18,"19r",20:26,"27r",28:37,"38r",39:60))]))==2,
+                               round(rowSums(df[paste0("ffni_",c(1:18,"19r",20:26,"27r",28:37,"38r",39:60))],na.rm=T)*60/58),ifelse(
+                                 rowSums(is.na(df[paste0("ffni_",c(1:18,"19r",20:26,"27r",28:37,"38r",39:60))]))==3,
+                                 round(rowSums(df[paste0("ffni_",c(1:18,"19r",20:26,"27r",28:37,"38r",39:60))],na.rm=T)*60/57),ifelse(
+                                   rowSums(is.na(df[paste0("ffni_",c(1:18,"19r",20:26,"27r",28:37,"38r",39:60))]))==4,
+                                   round(rowSums(df[paste0("ffni_",c(1:18,"19r",20:26,"27r",28:37,"38r",39:60))],na.rm=T)*60/56),ifelse(
+                                     rowSums(is.na(df[paste0("ffni_",c(1:18,"19r",20:26,"27r",28:37,"38r",39:60))]))==5,
+                                     round(rowSums(df[paste0("ffni_",c(1:18,"19r",20:26,"27r",28:37,"38r",39:60))],na.rm=T)*60/55),ifelse(
+                                       rowSums(is.na(df[paste0("ffni_",c(1:18,"19r",20:26,"27r",28:37,"38r",39:60))]))==6,
+                                       round(rowSums(df[paste0("ffni_",c(1:18,"19r",20:26,"27r",28:37,"38r",39:60))],na.rm=T)*60/54),NA))))))))
+            
+            
+          
+
+  
+  return(df)
+}
+
+#icg scoring
+score.icg <- function(df=NULL){
+  df<-df %>% mutate_at(vars(paste0("icg_",c(1:19))),as.numeric)
+  
+  df <-df %>%
+    mutate (icg_total=ifelse(rowSums(is.na(df[paste0("icg_",c(1:19))]))==0,
+                             rowSums(df[paste0("icg_",c(1:19))]),ifelse(
+                               rowSums(is.na(df[paste0("icg_",c(1:19))]))==1,
+                               round(rowSums(df[paste0("icg_",c(1:19))],na.rm=T)*19/18),NA)))
+  return(df)
+}
+
+#ius
+score.ius<- function(df=NULL){
+  df<-df %>% mutate_at(vars(paste0("ius_",c(1:19))),as.numeric)
+  
+  df <-df %>%
+    mutate (ius_total=ifelse(rowSums(is.na(df[paste0("ius_",c(1:27))]))==0,
+                             rowSums(df[paste0("ius_",c(1:27))]),ifelse(
+                               rowSums(is.na(df[paste0("ius_",c(1:27))]))==1,
+                               round(rowSums(df[paste0("ius_",c(1:27))],na.rm=T)*27/26),ifelse(
+                                 rowSums(is.na(df[paste0("ius_",c(1:27))]))==2,
+                                 round(rowSums(df[paste0("ius_",c(1:27))],na.rm=T)*27/25),NA))),
+            ius_fac1=ifelse(rowSums(is.na(df[paste0("ius_",c(1, 2, 3, 9, 12, 13, 14, 15, 16, 17, 20, 22, 23, 24, 25))]))==0,
+                            rowSums(df[paste0("ius_",c(1, 2, 3, 9, 12, 13, 14, 15, 16, 17, 20, 22, 23, 24, 25))]),ifelse(
+                              rowSums(is.na(df[paste0("ius_",c(1, 2, 3, 9, 12, 13, 14, 15, 16, 17, 20, 22, 23, 24, 25))]))==1,
+                              round(rowSums(df[paste0("ius_",c(1, 2, 3, 9, 12, 13, 14, 15, 16, 17, 20, 22, 23, 24, 25))],na.rm=T)*15/14),NA)),
+            ius_fac2=ifelse(rowSums(is.na(df[paste0("icg_",c(4, 5, 6, 7, 8, 10, 11, 18, 19, 21, 26,27))]))==0,
+                            rowSums(df[paste0("icg_",c(4, 5, 6, 7, 8, 10, 11, 18, 19, 21, 26,27))]),ifelse(
+                              rowSums(is.na(df[paste0("icg_",c(4, 5, 6, 7, 8, 10, 11, 18, 19, 21, 26,27))]))==1,
+                              round(rowSums(df[paste0("icg_",c(4, 5, 6, 7, 8, 10, 11, 18, 19, 21, 26,27))],na.rm=T)*12/11),NA)))
+  return(df)
+}
+
+#narq scoring
+score.narq <- function(df=NULL){
+  df<-df %>% mutate_at(vars(paste0("narq_brief_",c(1:6))),as.numeric)
+  
+  df <-df %>%
+    mutate (narq_total=ifelse(rowSums(is.na(df[paste0("narq_brief_",c(1:6))]))==0,
+                             rowSums(df[paste0("narq_brief_",c(1:6))])/6,NA),
+            narq_admire=ifelse(rowSums(is.na(df[paste0("narq_brief_",c(2,4,5))]))==0,
+                               rowSums(df[paste0("narq_brief_",c(2,4,5))])/3,NA),
+            narq_rivalry=ifelse(rowSums(is.na(df[paste0("narq_brief_",c(1,3,6))]))==0,
+                   rowSums(df[paste0("narq_brief_",c(1,3,6))])/3,NA))
+  return(df)
+}
+
+
+#pid5 scoring
+score.pid5 <- function(df=NULL){
+  df<-df %>% mutate_at(vars(paste0("pid5_",c(1:100))),as.numeric)
+  
+  df <-df %>%
+    mutate (pid5_negativeaffect_s=ifelse(rowSums(is.na(df[paste0("pid5_", c(24,36,48,78,41,53,71,81,17,45,58,79,12,31,66,75,19,25,32,46,"28r","30r","73r","83r",3,4,20,92))]))==0, 
+                             rowSums(df[paste0("pid5_", c(24,36,48,78,41,53,71,81,17,45,58,79,12,31,66,75,19,25,32,46,"28r","30r","73r","83r",3,4,20,92))]),
+                             ifelse(rowSums(is.na(df[paste0("pid5_", c(24,36,48,78,41,53,71,81,17,45,58,79,12,31,66,75,19,25,32,46,"28r","30r","73r","83r",3,4,20,92))]))==1, 
+                                    rowSums(df[paste0("pid5_", c(24,36,48,78,41,53,71,81,17,45,58,79,12,31,66,75,19,25,32,46,"28r","30r","73r","83r",3,4,20,92))])*28/27,
+                                    ifelse(rowSums(is.na(df[paste0("pid5_", c(24,36,48,78,41,53,71,81,17,45,58,79,12,31,66,75,19,25,32,46,"28r","30r","73r","83r",3,4,20,92))]))==2,
+                                           rowSums(df[paste0("pid5_", c(24,36,48,78,41,53,71,81,17,45,58,79,12,31,66,75,19,25,32,46,"28r","30r","73r","83r",3,4,20,92))])*28/26, NA))),
+            pid5_detachment_s=ifelse(rowSums(is.na(df[paste0("pid5_", c(27,52,57,84,9,11,26,43,65,29,40,56,93,26,60,70,74,1,38,50,86))]))==0, 
+                                         rowSums(df[paste0("pid5_", c(27,52,57,84,9,11,26,43,65,29,40,56,93,26,60,70,74,1,38,50,86))]),
+                                         ifelse(rowSums(is.na(df[paste0("pid5_", c(27,52,57,84,9,11,26,43,65,29,40,56,93,26,60,70,74,1,38,50,86))]))==1, 
+                                                rowSums(df[paste0("pid5_", c(27,52,57,84,9,11,26,43,65,29,40,56,93,26,60,70,74,1,38,50,86))])*21/20,
+                                                ifelse(rowSums(is.na(df[paste0("pid5_", c(27,52,57,84,9,11,26,43,65,29,40,56,93,26,60,70,74,1,38,50,86))]))==2,
+                                                       rowSums(df[paste0("pid5_", c(27,52,57,84,9,11,26,43,65,29,40,56,93,26,60,70,74,1,38,50,86))])*21/19, NA))),
+            pid5_antagonism_s=ifelse(rowSums(is.na(df[paste0("pid5_", c(35,44,69,100,18,53,95,99,14,37,85,90,7,62,72,82,23,77,87,97))]))==0, 
+                                     rowSums(df[paste0("pid5_", c(35,44,69,100,18,53,95,99,14,37,85,90,7,62,72,82,23,77,87,97))]),
+                                     ifelse(rowSums(is.na(df[paste0("pid5_", c(35,44,69,100,18,53,95,99,14,37,85,90,7,62,72,82,23,77,87,97))]))==1, 
+                                            rowSums(df[paste0("pid5_", c(35,44,69,100,18,53,95,99,14,37,85,90,7,62,72,82,23,77,87,97))])*20/19,
+                                            ifelse(rowSums(is.na(df[paste0("pid5_", c(35,44,69,100,18,53,95,99,14,37,85,90,7,62,72,82,23,77,87,97))]))==2,
+                                                   rowSums(df[paste0("pid5_", c(35,44,69,100,18,53,95,99,14,37,85,90,7,62,72,82,23,77,87,97))])*20/18, NA))),
+            pid5_disinhibition_s=ifelse(rowSums(is.na(df[paste0("pid5_", c(47,64,68,76,2,5,6,8,39,49,55,91,"33r","42r","83r","89r",13,16,21,67))]))==0, 
+                                     rowSums(df[paste0("pid5_", c(47,64,68,76,2,5,6,8,39,49,55,91,"33r","42r","83r","89r",13,16,21,67))]),
+                                     ifelse(rowSums(is.na(df[paste0("pid5_", c(47,64,68,76,2,5,6,8,39,49,55,91,"33r","42r","83r","89r",13,16,21,67))]))==1, 
+                                            rowSums(df[paste0("pid5_", c(47,64,68,76,2,5,6,8,39,49,55,91,"33r","42r","83r","89r",13,16,21,67))])*20/19,
+                                            ifelse(rowSums(is.na(df[paste0("pid5_", c(47,64,68,76,2,5,6,8,39,49,55,91,"33r","42r","83r","89r",13,16,21,67))]))==2,
+                                                   rowSums(df[paste0("pid5_", c(47,64,68,76,2,5,6,8,39,49,55,91,"33r","42r","83r","89r",13,16,21,67))])*20/18, NA))),
+            pid5_disinhibition_s=ifelse(rowSums(is.na(df[paste0("pid5_", c(34,54,59,96,10,22,61,94,15,63,88,98))]))==0, 
+                                        rowSums(df[paste0("pid5_", c(34,54,59,96,10,22,61,94,15,63,88,98))]),
+                                        ifelse(rowSums(is.na(df[paste0("pid5_", c(34,54,59,96,10,22,61,94,15,63,88,98))]))==1, 
+                                               rowSums(df[paste0("pid5_", c(34,54,59,96,10,22,61,94,15,63,88,98))])*12/11, NA)))
+  return(df)
+}
+
+#mfq scoring
+score.mfq <- function(df=NULL){
+  mfq_vars1<-paste0("mfq_",c('2a','2b','2c','2d','2e','2f','2g','2h','2i','2j','2k','2l','2m','2n','2o','2p','2q','2r'))
+  mfq_vars2<-paste0("mfq_",c('3a','3b','3c','3d','3e'))
+  mfq_vars3<-paste0("mfq_",c('4a','4b','4c','4d','4e'))
+  mfq_vars4<-paste0("mfq_",c('5a','5b','5c','5d'))
+  mfq_vars5<-paste0("mfq_",c('6a','6b','6c','6d','6e','6f','6g','6h','6i','6j','6k','6l','6m','6n','6o','6p','6q','6r'))
+  mfq_vars6<-paste0("mfq_",c('7a','7b','7c','7d','7e'))
+  mfq_vars7<-paste0("mfq_",c('8a','8b','8c','8d','8e','8f','8g','8h'))
+  
+  df<-df %>% mutate_at(vars(drs_vars1),as.numeric)%>% mutate_at(vars(drs_vars2),as.numeric)%>% mutate_at(vars(drs_vars3),as.numeric)%>% 
+    mutate_at(vars(drs_vars4),as.numeric)%>% mutate_at(vars(drs_vars5),as.numeric)%>% mutate_at(vars(drs_vars6),as.numeric)%>% mutate_at(vars(drs_vars7),as.numeric)
+  
+  
+  df <-df %>%
+    mutate (mfq_gen_forget=ifelse(rowSums(is.na(df[paste0("mfq_", c('2a','2b','2c','2d','2e','2f','2g','2h','2i','2j','2k','2l','2m','2n','2o','2p','2q','2r','3a','3b','3c','3d','3e','4a','4b','4c','4d','4e','5a','5b','5c','5d'))]))==0, 
+                                         rowSums(df[paste0("mfq_", c('2a','2b','2c','2d','2e','2f','2g','2h','2i','2j','2k','2l','2m','2n','2o','2p','2q','2r','3a','3b','3c','3d','3e','4a','4b','4c','4d','4e','5a','5b','5c','5d'))]),
+                                         ifelse(rowSums(is.na(df[paste0("mfq_", c('2a','2b','2c','2d','2e','2f','2g','2h','2i','2j','2k','2l','2m','2n','2o','2p','2q','2r','3a','3b','3c','3d','3e','4a','4b','4c','4d','4e','5a','5b','5c','5d'))]))==1, 
+                                                rowSums(df[paste0("mfq_", c('2a','2b','2c','2d','2e','2f','2g','2h','2i','2j','2k','2l','2m','2n','2o','2p','2q','2r','3a','3b','3c','3d','3e','4a','4b','4c','4d','4e','5a','5b','5c','5d'))])*32/31,
+                                                ifelse(rowSums(is.na(df[paste0("mfq_", c('2a','2b','2c','2d','2e','2f','2g','2h','2i','2j','2k','2l','2m','2n','2o','2p','2q','2r','3a','3b','3c','3d','3e','4a','4b','4c','4d','4e','5a','5b','5c','5d'))]))==2,
+                                                       rowSums(df[paste0("mfq_", c('2a','2b','2c','2d','2e','2f','2g','2h','2i','2j','2k','2l','2m','2n','2o','2p','2q','2r','3a','3b','3c','3d','3e','4a','4b','4c','4d','4e','5a','5b','5c','5d'))])*32/30,
+                                                       ifelse(rowSums(is.na(df[paste0("mfq_", c('2a','2b','2c','2d','2e','2f','2g','2h','2i','2j','2k','2l','2m','2n','2o','2p','2q','2r','3a','3b','3c','3d','3e','4a','4b','4c','4d','4e','5a','5b','5c','5d'))]))==3,
+                                                              rowSums(df[paste0("mfq_", c('2a','2b','2c','2d','2e','2f','2g','2h','2i','2j','2k','2l','2m','2n','2o','2p','2q','2r','3a','3b','3c','3d','3e','4a','4b','4c','4d','4e','5a','5b','5c','5d'))])*32/29, NA)))),
+            mfq_serious_forget=ifelse(rowSums(is.na(df[paste0("mfq_", c('6a','6b','6c','6d','6e','6f','6g','6h','6i','6j','6k','6l','6m','6n','6o','6p','6q','6r'))]))==0, 
+                                     rowSums(df[paste0("mfq_", c('6a','6b','6c','6d','6e','6f','6g','6h','6i','6j','6k','6l','6m','6n','6o','6p','6q','6r'))]),
+                                     ifelse(rowSums(is.na(df[paste0("mfq_", c('6a','6b','6c','6d','6e','6f','6g','6h','6i','6j','6k','6l','6m','6n','6o','6p','6q','6r'))]))==1, 
+                                            rowSums(df[paste0("mfq_", c('6a','6b','6c','6d','6e','6f','6g','6h','6i','6j','6k','6l','6m','6n','6o','6p','6q','6r'))])*18/17, NA)),
+            mfq_retro_function=ifelse(rowSums(is.na(df[paste0("mfq_", c('7a','7b','7c','7d','7e'))]))==0, 
+                                     rowSums(df[paste0("mfq_", c('7a','7b','7c','7d','7e'))]), NA),
+            mfq_disinhibition_s=ifelse(rowSums(is.na(df[paste0("mfq_", c('8a','8b','8c','8d','8e','8f','8g','8h'))]))==0, 
+                                        rowSums(df[paste0("mfq_", c('8a','8b','8c','8d','8e','8f','8g','8h'))]),NA))
+  
+  return(df)
+}
+
+#rrs scoring
+score.rrs<- function(df=NULL){
+  df<-df %>% mutate_at(vars(paste0("rrs_",c(1:22))),as.numeric)
+  
+  df <-df %>%
+    mutate (rrs_total=ifelse(rowSums(is.na(df[paste0("rrs_",c(1:22))]))==0,
+                             rowSums(df[paste0("rrs_",c(1:22))]),ifelse(
+                               rowSums(is.na(df[paste0("rrs_",c(1:22))]))==1,
+                               round(rowSums(df[paste0("rrs_",c(1:22))],na.rm=T)*22/21),ifelse(
+                                 rowSums(is.na(df[paste0("rrs_",c(1:22))]))==2,
+                                 round(rowSums(df[paste0("rrs_",c(1:22))],na.rm=T)*22/20),NA))))
+  return(df)
+}
+  
+#sm scoring
+score.sm <- function(df=NULL){
+  df<-df %>% mutate_at(vars(paste0("sm_",c(1:16))),as.numeric)%>%
+    mutate(sm_5r=6-sm_5)
+  
+  df <-df %>%
+    mutate (sm_maxim=ifelse(rowSums(is.na(df[paste0("sm_",c(6:18))]))==0,
+                               rowSums(df[paste0("sm_",c(6:18))]),ifelse(
+                                 rowSums(is.na(df[paste0("sm_",c(6:18))]))==1,
+                                 round(rowSums(df[paste0("sm_",c(6:18))],na.rm=T)*13/12),NA)),
+            sm_regret=ifelse(rowSums(is.na(df[paste0("sm_", c(1:4, "5r"))]))==0, 
+                               rowSums(df[paste0("sm_", c(1:4, "5r"))]),NA))
+  
+  return(df)
+}
+

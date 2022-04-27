@@ -4,7 +4,7 @@ bsrc.score<-function(df=NULL,formname=NULL,...){
   possible_forms<-c("ssi","sis","athf","ham","cirsg","sidp","exit","drs","wtar","mmse","ars",
                     "bis","ctq","isel","iip","ta","neo","paibor","spsi","ssd","uppsp","fs", "let", 
                     "swls","maas","ah","bsia","cfcs", "ders", "iri", "nfc", "rand12", "bpni" ,"bhs","ipipds",
-                    "bipa","dws","es","ffni","icg","ius","narq","pid5","mfq","rrs","sm")
+                    "bipa","dws","es","ffni","icg","ius","narq","pid5","mfq","rrs","sm", "doi","scs", "sas","uclals")
   if(is.null(formname)){
     message("No form name supplied, choose one of these options:")
     print(possible_forms)
@@ -1217,4 +1217,636 @@ score.sm <- function(df=NULL){
   
   return(df)
 }
+
+#doi scoring
+score.doi <- function(df=NULL){
+  df$doi_life_1a->df$doi_life_1a_og
+  df$doi_life_1a[df$doi_life_1a_og==0]<-1
+  df$doi_life_1a[df$doi_life_1a_og==1]<-0
+  
+  # Q1
+  df$opportunity1lifetime <- df$doi_life_1a
+  df$opportunity1tenyrs <- df$doi_10years_1a
+  df$goodoutcome1lifetime <- 1 - df$doi_life_1b
+  df$goodoutcome1tenyrs <- 1 - df$doi_10years_1b
+  
+  # Q2
+  df$opportunity2lifetime <- df$doi_life_2a
+  df$opportunity2tenyrs <- df$doi_10years_2a
+  df$goodoutcome2lifetime <- 1 - df$doi_life_2b
+  df$goodoutcome2tenyrs <- 1 - df$doi_10years_2b
+  
+  # Q3
+  df$opportunity3lifetime <- df$doi_life_3a
+  df$opportunity3tenyrs <- df$doi_10years_3a
+  df$goodoutcome3lifetime <- 1 - df$doi_life_3b
+  df$goodoutcome3tenyrs <- 1 - df$doi_10years_3b
+  
+  # Q4
+  df$opportunity4lifetime <- df$doi_life_4a
+  df$opportunity4tenyrs <- df$doi_10years_4a
+  df$goodoutcome4lifetime <- 1 - df$doi_life_4b
+  df$goodoutcome4tenyrs <- 1 - df$doi_10years_4b
+  
+  # Q5
+  df$opportunity5lifetime <- df$doi_life_5a
+  df$opportunity5tenyrs <- df$doi_10years_5a
+  df$goodoutcome5lifetime <- 1 - df$doi_life_5b
+  df$goodoutcome5tenyrs <- 1 - df$doi_10years_5b
+  
+  # Q6
+  df$opportunity6lifetime <- df$doi_life_6a
+  df$opportunity6tenyrs <- df$doi_10years_6a
+  df$goodoutcome6lifetime <- 1 - df$doi_life_6b
+  df$goodoutcome6tenyrs <- 1 - df$doi_10years_6b
+  
+  # Q7
+  df$opportunity7lifetime <- df$doi_life_7a
+  df$opportunity7tenyrs <- df$doi_10years_7a
+  df$goodoutcome7blifetime <- 1 - df$doi_life_7b
+  df$goodoutcome7btenyrs <- 1 - df$doi_10years_7b
+  
+  df$goodoutcome7clifetime <- 1 - df$doi_life_7c
+  df$goodoutcome7ctenyrs <- 1 - df$doi_10years_7c
+  
+  df$goodoutcome7dlifetime <- 1 - df$doi_life_7d
+  df$goodoutcome7dtenyrs <- 1 - df$doi_10years_7d
+  
+  df$goodoutcome7elifetime <- 1 - df$doi_life_7e
+  df$goodoutcome7etenyrs <- 1 - df$doi_10years_7e
+  
+  df$goodoutcome7flifetime <- 1 - df$doi_life_7f
+  df$goodoutcome7ftenyrs <- 1 - df$doi_10years_7f
+  
+  # Q8
+  df$opportunity8lifetime <- df$doi_life_8a
+  df$opportunity8tenyrs <- df$doi_10years_8a
+  df$goodoutcome8lifetime <- 1 - df$doi_life_8b
+  df$goodoutcome8tenyrs <- 1 - df$doi_10years_8b
+  
+  # Q9
+  df$opportunity9lifetime <- df$doi_life_9a
+  df$opportunity9tenyrs <- df$doi_10years_9a
+  df$goodoutcome9lifetime <- 1 - df$doi_life_9b
+  df$goodoutcome9tenyrs <- 1 - df$doi_10years_9b
+  
+  # Q10
+  df$opportunity10lifetime <- df$doi_life_10a
+  df$opportunity10tenyrs <- df$doi_10years_10a
+  df$goodoutcome10lifetime <- 1 - df$doi_life_10b
+  df$goodoutcome10tenyrs <- 1 - df$doi_10years_10b
+  
+  # Q11
+  df$opportunity11lifetime <- df$doi_life_11a
+  df$opportunity11tenyrs <- df$doi_10years_11a
+  df$goodoutcome11lifetime <- 1 - df$doi_life_11b
+  df$goodoutcome11tenyrs <- 1 - df$doi_10years_11b
+  
+  # Q12
+  df$opportunity12lifetime <- df$doi_life_12a
+  df$opportunity12tenyrs <- df$doi_10years_12a
+  df$goodoutcome12lifetime <- 1 - df$doi_life_12b
+  df$goodoutcome12tenyrs <- 1 - df$doi_10years_12b
+  
+  # Q13
+  df$opportunity13lifetime <- df$doi_life_13a
+  df$opportunity13tenyrs <- df$doi_10years_13a
+  df$goodoutcome13blifetime <- 1 - df$doi_life_13b
+  df$goodoutcome13btenyrs <- 1 - df$doi_10years_13b
+  
+  df$goodoutcome13clifetime <- 1 - df$doi_life_13c
+  df$goodoutcome13ctenyrs <- 1 - df$doi_10years_13c
+  
+  # Q14
+  df$opportunity14lifetime <- df$doi_life_14a
+  df$opportunity14tenyrs <- df$doi_10years_14a
+  df$goodoutcome14lifetime <- 1 - df$doi_life_14b
+  df$goodoutcome14tenyrs <- 1 - df$doi_10years_14b
+  
+  # Q15
+  df$opportunity15lifetime <- df$doi_life_15a
+  df$opportunity15tenyrs <- df$doi_10years_15a
+  df$goodoutcome15lifetime <- 1 - df$doi_life_15b
+  df$goodoutcome15tenyrs <- 1 - df$doi_10years_15b
+  
+  # Q16
+  df$opportunity16lifetime <- df$doi_life_16a
+  df$opportunity16tenyrs <- df$doi_10years_16a
+  df$goodoutcome16lifetime <- 1 - df$doi_life_16b
+  df$goodoutcome16tenyrs <- 1 - df$doi_10years_16b
+  
+  # Q17
+  df$opportunity17lifetime <- df$doi_life_17a
+  df$opportunity17tenyrs <- df$doi_10years_17a
+  df$goodoutcome17lifetime <- 1 - df$doi_life_17b
+  df$goodoutcome17tenyrs <- 1 - df$doi_10years_17b
+  
+  # Q18
+  df$opportunity18lifetime <- df$doi_life_18a
+  df$opportunity18tenyrs <- df$doi_10years_18a
+  df$goodoutcome18lifetime <- 1 - df$doi_life_18b
+  df$goodoutcome18tenyrs <- 1 - df$doi_10years_18b
+  
+  # Q19
+  df$opportunity19lifetime <- df$doi_life_19a
+  df$opportunity19tenyrs <- df$doi_10years_19a
+  df$goodoutcome19lifetime <- 1 - df$doi_life_19b
+  df$goodoutcome19tenyrs <- 1 - df$doi_10years_19b
+  
+  # Q20
+  df$opportunity20lifetime <- df$doi_life_20a
+  df$opportunity20tenyrs <- df$doi_10years_20a
+  df$goodoutcome20lifetime <- 1 - df$doi_life_20b
+  df$goodoutcome20tenyrs <- 1 - df$doi_10years_20b
+  
+  # Q21
+  df$opportunity21lifetime <- df$doi_life_21a
+  df$opportunity21tenyrs <- df$doi_10years_21a
+  df$goodoutcome21lifetime <- 1 - df$doi_life_21b
+  df$goodoutcome21tenyrs <- 1 - df$doi_10years_21b
+  
+  # Q22
+  df$opportunity22lifetime <- df$doi_life_22a
+  df$opportunity22tenyrs <- df$doi_10years_22a
+  df$goodoutcome22lifetime <- 1 - df$doi_life_22b
+  df$goodoutcome22tenyrs <- 1 - df$doi_10years_22b
+  
+  # Q23
+  df$opportunity23lifetime <- df$doi_life_23a
+  df$opportunity23tenyrs <- df$doi_10years_23a
+  df$goodoutcome23lifetime <- 1 - df$doi_life_23b
+  df$goodoutcome23tenyrs <- 1 - df$doi_10years_23b
+  
+  # Q24
+  df$opportunity24lifetime <- df$doi_life_24a
+  df$opportunity24tenyrs <- df$doi_10years_24a
+  df$goodoutcome24lifetime <- 1 - df$doi_life_24b
+  df$goodoutcome24tenyrs <- 1 - df$doi_10years_24b
+  
+  # Q25
+  df$opportunity25lifetime <- df$doi_life_25a
+  df$opportunity25tenyrs <- df$doi_life_25a
+  df$goodoutcome25blifetime <- 1 - df$doi_life_25b
+  df$goodoutcome25btenyrs <- 1 - df$doi_10years_25b
+  
+  df$goodoutcome25clifetime <- 1 - df$doi_life_25c
+  df$goodoutcome25ctenyrs <- 1 - df$doi_10years_25c
+  
+  # Q26
+  df$opportunity26lifetime <- df$doi_life_26a
+  df$opportunity26tenyrs <- df$doi_10years_26a
+  df$goodoutcome26lifetime <- 1 - df$doi_life_26b
+  df$goodoutcome26tenyrs <- 1 - df$doi_10years_26b
+  
+  # Q27
+  df$goodoutcome27lifetime <- 1 - df$doi_life_27a
+  df$goodoutcome27tenyrs <- 1 - df$doi_10years_27a
+  
+  # Q28
+  df$goodoutcome28lifetime <- 1 - df$doi_life_28a
+  df$goodoutcome28tenyrs <- 1 - df$doi_10years_28a
+  
+  # Q29
+  df$goodoutcome29lifetime <- 1 - df$doi_life_29a
+  df$goodoutcome29tenyrs <- 1 - df$doi_10years_29a
+  
+  # Q30
+  df$goodoutcome30lifetime <- 1 - df$doi_life_30a
+  df$goodoutcome30tenyrs <- 1 - df$doi_10years_30a
+  
+  # Q31
+  df$goodoutcome31lifetime <- 1 - df$doi_life_31a
+  df$goodoutcome31tenyrs <- 1 - df$doi_10years_31a
+  
+  # Q32
+  df$goodoutcome32lifetime <- 1 - df$doi_life_32a
+  df$goodoutcome32tenyrs <- 1 - df$doi_10years_32a
+  
+  # Q33
+  df$goodoutcome33lifetime <- 1 - df$doi_life_33a
+  df$goodoutcome33tenyrs <- 1 - df$doi_10years_33a
+  
+  # Q34
+  df$goodoutcome34lifetime <- 1 - df$doi_life_34a
+  df$goodoutcome34tenyrs <- 1 - df$doi_10years_34a
+  
+  # Q35
+  df$goodoutcome35lifetime <- 1 - df$doi_life_35b
+  df$goodoutcome35tenyrs <- 1 - df$doi_10years_35b
+  
+  
+  # total opportunity
+  df$totalopportunity_lifetime = rowSums(df[,c("opportunity1lifetime","opportunity2lifetime","opportunity3lifetime","opportunity4lifetime","opportunity5lifetime",
+                                               "opportunity6lifetime","opportunity7lifetime","opportunity8lifetime","opportunity9lifetime","opportunity10lifetime",
+                                               "opportunity11lifetime","opportunity12lifetime","opportunity13lifetime","opportunity14lifetime","opportunity15lifetime",
+                                               "opportunity16lifetime","opportunity17lifetime","opportunity18lifetime","opportunity19lifetime","opportunity20lifetime",
+                                               "opportunity21lifetime","opportunity22lifetime","opportunity23lifetime","opportunity24lifetime","opportunity25lifetime","opportunity26lifetime")], na.rm = FALSE)
+  
+  
+  df$totalopportunity_tenyrs = rowSums(df[,c("opportunity1tenyrs","opportunity2tenyrs","opportunity3tenyrs","opportunity4tenyrs","opportunity5tenyrs",
+                                             "opportunity6tenyrs","opportunity7tenyrs","opportunity8tenyrs","opportunity9tenyrs","opportunity10tenyrs",
+                                             "opportunity11tenyrs","opportunity12tenyrs","opportunity13tenyrs","opportunity14tenyrs","opportunity15tenyrs",
+                                             "opportunity16tenyrs","opportunity17tenyrs","opportunity18tenyrs","opportunity19tenyrs","opportunity20tenyrs",
+                                             "opportunity21tenyrs","opportunity22tenyrs","opportunity23tenyrs","opportunity24tenyrs","opportunity25tenyrs","opportunity26tenyrs")], na.rm = FALSE)
+  
+  
+  
+  df[is.na(df)] <- 99
+  
+  # doiscore1
+  df$doiscore1lifetime <- NA
+  df$doiscore1lifetime[df$opportunity1lifetime == 1] <- df$goodoutcome1lifetime[df$opportunity1lifetime == 1]
+  df$doiscore1tenyrs <- NA
+  df$doiscore1tenyrs[df$opportunity1tenyrs == 1] <- df$goodoutcome1tenyrs[df$opportunity1tenyrs == 1]
+  
+  # doiscore2
+  df$doiscore2lifetime <- NA
+  df$doiscore2lifetime[df$opportunity2lifetime == 1] <- df$goodoutcome2lifetime[df$opportunity2lifetime == 1]
+  df$doiscore2tenyrs <- NA
+  df$doiscore2tenyrs[df$opportunity2tenyrs == 1] <- df$goodoutcome2tenyrs[df$opportunity2tenyrs == 1]
+  
+  # doiscore3
+  df$doiscore3lifetime <- NA
+  df$doiscore3lifetime[df$opportunity3lifetime == 1] <- df$goodoutcome3lifetime[df$opportunity3lifetime == 1]
+  df$doiscore3tenyrs <- NA
+  df$doiscore3tenyrs[df$opportunity3tenyrs == 1] <- df$goodoutcome3tenyrs[df$opportunity3tenyrs == 1]
+  
+  # doiscore4
+  df$doiscore4lifetime <- NA
+  df$doiscore4lifetime[df$opportunity4lifetime == 1] <- df$goodoutcome4lifetime[df$opportunity4lifetime == 1]
+  df$doiscore4tenyrs <- NA
+  df$doiscore4tenyrs[df$opportunity4tenyrs == 1] <- df$goodoutcome4tenyrs[df$opportunity4tenyrs == 1]
+  
+  # doiscore5
+  df$doiscore5lifetime <- NA
+  df$doiscore5lifetime[df$opportunity5lifetime == 1] <- df$goodoutcome5lifetime[df$opportunity5lifetime == 1]
+  df$doiscore5tenyrs <- NA
+  df$doiscore5tenyrs[df$opportunity5tenyrs == 1] <- df$goodoutcome5tenyrs[df$opportunity5tenyrs == 1]
+  
+  # doiscore6
+  df$doiscore6lifetime <- NA
+  df$doiscore6lifetime[df$opportunity6lifetime == 1] <- df$goodoutcome6lifetime[df$opportunity6lifetime == 1]
+  df$doiscore6tenyrs <- NA
+  df$doiscore6tenyrs[df$opportunity6tenyrs == 1] <- df$goodoutcome6tenyrs[df$opportunity6tenyrs == 1]
+  
+  # doiscore7
+  df$doiscore7blifetime <- NA
+  df$doiscore7blifetime[df$opportunity7lifetime == 1] <- df$goodoutcome7blifetime[df$opportunity7lifetime == 1]
+  df$doiscore7btenyrs <- NA
+  df$doiscore7btenyrs[df$opportunity7tenyrs == 1] <- df$goodoutcome7btenyrs[df$opportunity7tenyrs == 1]
+  
+  df$doiscore7clifetime <- NA
+  df$doiscore7clifetime[df$opportunity7lifetime == 1] <- df$goodoutcome7clifetime[df$opportunity7lifetime == 1]
+  df$doiscore7ctenyrs <- NA
+  df$doiscore7ctenyrs[df$opportunity7tenyrs == 1] <- df$goodoutcome7ctenyrs[df$opportunity7tenyrs == 1]
+  
+  df$doiscore7dlifetime <- NA
+  df$doiscore7dlifetime[df$opportunity7lifetime == 1] <- df$goodoutcome7dlifetime[df$opportunity7lifetime == 1]
+  df$doiscore7dtenyrs <- NA
+  df$doiscore7dtenyrs[df$opportunity7tenyrs == 1] <- df$goodoutcome7dtenyrs[df$opportunity7tenyrs == 1]
+  
+  df$doiscore7elifetime <- NA
+  df$doiscore7elifetime[df$opportunity7lifetime == 1] <- df$goodoutcome7elifetime[df$opportunity7lifetime == 1]
+  df$doiscore7etenyrs <- NA
+  df$doiscore7etenyrs[df$opportunity7tenyrs == 1] <- df$goodoutcome7etenyrs[df$opportunity7tenyrs == 1]
+  
+  df$doiscore7flifetime <- NA
+  df$doiscore7flifetime[df$opportunity7lifetime == 1] <- df$goodoutcome7flifetime[df$opportunity7lifetime == 1]
+  df$doiscore7ftenyrs <- NA
+  df$doiscore7ftenyrs[df$opportunity7tenyrs == 1] <- df$goodoutcome7ftenyrs[df$opportunity7tenyrs == 1]
+  
+  # doiscore8
+  df$doiscore8lifetime <- NA
+  df$doiscore8lifetime[df$opportunity8lifetime == 1] <- df$goodoutcome8lifetime[df$opportunity8lifetime == 1]
+  df$doiscore8tenyrs <- NA
+  df$doiscore8tenyrs[df$opportunity8tenyrs == 1] <- df$goodoutcome8tenyrs[df$opportunity8tenyrs == 1]
+  
+  # doiscore9
+  df$doiscore9lifetime <- NA
+  df$doiscore9lifetime[df$opportunity9lifetime == 1] <- df$goodoutcome9lifetime[df$opportunity9lifetime == 1]
+  df$doiscore9tenyrs <- NA
+  df$doiscore9tenyrs[df$opportunity9tenyrs == 1] <- df$goodoutcome9tenyrs[df$opportunity9tenyrs == 1]
+  
+  # doiscore10
+  df$doiscore10lifetime <- NA
+  df$doiscore10lifetime[df$opportunity10lifetime == 1] <- df$goodoutcome10lifetime[df$opportunity10lifetime == 1]
+  df$doiscore10tenyrs <- NA
+  df$doiscore10tenyrs[df$opportunity10tenyrs == 1] <- df$goodoutcome10tenyrs[df$opportunity10tenyrs == 1]
+  
+  # doiscore11
+  df$doiscore11lifetime <- NA
+  df$doiscore11lifetime[df$opportunity11lifetime == 1] <- df$goodoutcome11lifetime[df$opportunity11lifetime == 1]
+  df$doiscore11tenyrs <- NA
+  df$doiscore11tenyrs[df$opportunity11tenyrs == 1] <- df$goodoutcome11tenyrs[df$opportunity11tenyrs == 1]
+  
+  # doiscore12
+  df$doiscore12lifetime <- NA
+  df$doiscore12lifetime[df$opportunity12lifetime == 1] <- df$goodoutcome12lifetime[df$opportunity12lifetime == 1]
+  df$doiscore12tenyrs <- NA
+  df$doiscore12tenyrs[df$opportunity12tenyrs == 1] <- df$goodoutcome12tenyrs[df$opportunity12tenyrs == 1]
+  
+  # doiscore13
+  df$doiscore13blifetime <- NA
+  df$doiscore13blifetime[df$opportunity13lifetime == 1] <- df$goodoutcome13blifetime[df$opportunity13lifetime == 1]
+  df$doiscore13btenyrs <- NA
+  df$doiscore13btenyrs[df$opportunity13tenyrs == 1] <- df$goodoutcome13btenyrs[df$opportunity13tenyrs == 1]
+  
+  df$doiscore13clifetime <- NA
+  df$doiscore13clifetime[df$opportunity13lifetime == 1] <- df$goodoutcome13clifetime[df$opportunity13lifetime == 1]
+  df$doiscore13ctenyrs <- NA
+  df$doiscore13ctenyrs[df$opportunity13tenyrs == 1] <- df$goodoutcome13ctenyrs[df$opportunity13tenyrs == 1]
+  
+  # doiscore14
+  df$doiscore14lifetime <- NA
+  df$doiscore14lifetime[df$opportunity14lifetime == 1] <- df$goodoutcome14lifetime[df$opportunity14lifetime == 1]
+  df$doiscore14tenyrs <- NA
+  df$doiscore14tenyrs[df$opportunity14tenyrs == 1] <- df$goodoutcome14tenyrs[df$opportunity14tenyrs == 1]
+  
+  # doiscore15
+  df$doiscore15lifetime <- NA
+  df$doiscore15lifetime[df$opportunity15lifetime == 1] <- df$goodoutcome15lifetime[df$opportunity15lifetime == 1]
+  df$doiscore15tenyrs <- NA
+  df$doiscore15tenyrs[df$opportunity15tenyrs == 1] <- df$goodoutcome15tenyrs[df$opportunity15tenyrs == 1]
+  
+  # doiscore16
+  df$doiscore16lifetime <- NA
+  df$doiscore16lifetime[df$opportunity16lifetime == 1] <- df$goodoutcome16lifetime[df$opportunity16lifetime == 1]
+  df$doiscore16tenyrs <- NA
+  df$doiscore16tenyrs[df$opportunity16tenyrs == 1] <- df$goodoutcome16tenyrs[df$opportunity16tenyrs == 1]
+  
+  # doiscore17
+  df$doiscore17lifetime <- NA
+  df$doiscore17lifetime[df$opportunity17lifetime == 1] <- df$goodoutcome17lifetime[df$opportunity17lifetime == 1]
+  df$doiscore17tenyrs <- NA
+  df$doiscore17tenyrs[df$opportunity17tenyrs == 1] <- df$goodoutcome17tenyrs[df$opportunity17tenyrs == 1]
+  
+  # doiscore18
+  df$doiscore18lifetime <- NA
+  df$doiscore18lifetime[df$opportunity18lifetime == 1] <- df$goodoutcome18lifetime[df$opportunity18lifetime == 1]
+  df$doiscore18tenyrs <- NA
+  df$doiscore18tenyrs[df$opportunity18tenyrs == 1] <- df$goodoutcome18tenyrs[df$opportunity18tenyrs == 1]
+  
+  # doiscore19
+  df$doiscore19lifetime <- NA
+  df$doiscore19lifetime[df$opportunity19lifetime == 1] <- df$goodoutcome19lifetime[df$opportunity19lifetime == 1]
+  df$doiscore19tenyrs <- NA
+  df$doiscore19tenyrs[df$opportunity19tenyrs == 1] <- df$goodoutcome19tenyrs[df$opportunity19tenyrs == 1]
+  
+  # doiscore20
+  df$doiscore20lifetime <- NA
+  df$doiscore20lifetime[df$opportunity20lifetime == 1] <- df$goodoutcome20lifetime[df$opportunity20lifetime == 1]
+  df$doiscore20tenyrs <- NA
+  df$doiscore20tenyrs[df$opportunity20tenyrs == 1] <- df$goodoutcome20tenyrs[df$opportunity20tenyrs == 1]
+  
+  # doiscore21
+  df$doiscore21lifetime <- NA
+  df$doiscore21lifetime[df$opportunity21lifetime == 1] <- df$goodoutcome21lifetime[df$opportunity21lifetime == 1]
+  df$doiscore21tenyrs <- NA
+  df$doiscore21tenyrs[df$opportunity21tenyrs == 1] <- df$goodoutcome21tenyrs[df$opportunity21tenyrs == 1]
+  
+  # doiscore22
+  df$doiscore22lifetime <- NA
+  df$doiscore22lifetime[df$opportunity22lifetime == 1] <- df$goodoutcome22lifetime[df$opportunity22lifetime == 1]
+  df$doiscore22tenyrs <- NA
+  df$doiscore22tenyrs[df$opportunity22tenyrs == 1] <- df$goodoutcome22tenyrs[df$opportunity22tenyrs == 1]
+  
+  # doiscore23
+  df$doiscore23lifetime <- NA
+  df$doiscore23lifetime[df$opportunity23lifetime == 1] <- df$goodoutcome23lifetime[df$opportunity23lifetime == 1]
+  df$doiscore23tenyrs <- NA
+  df$doiscore23tenyrs[df$opportunity23tenyrs == 1] <- df$goodoutcome23tenyrs[df$opportunity23tenyrs == 1]
+  
+  # doiscore24
+  df$doiscore24lifetime <- NA
+  df$doiscore24lifetime[df$opportunity24lifetime == 1] <- df$goodoutcome24lifetime[df$opportunity24lifetime == 1]
+  df$doiscore24tenyrs <- NA
+  df$doiscore24tenyrs[df$opportunity24tenyrs == 1] <- df$goodoutcome24tenyrs[df$opportunity24tenyrs == 1]
+  
+  # doiscore25
+  df$doiscore25blifetime <- NA
+  df$doiscore25blifetime[df$opportunity25lifetime == 1] <- df$goodoutcome25blifetime[df$opportunity25lifetime == 1]
+  df$doiscore25btenyrs <- NA
+  df$doiscore25btenyrs[df$opportunity25tenyrs == 1] <- df$goodoutcome25btenyrs[df$opportunity25tenyrs == 1]
+  
+  df$doiscore25clifetime <- NA
+  df$doiscore25clifetime[df$opportunity25lifetime == 1] <- df$goodoutcome25clifetime[df$opportunity25lifetime == 1]
+  df$doiscore25ctenyrs <- NA
+  df$doiscore25ctenyrs[df$opportunity25tenyrs == 1] <- df$goodoutcome25ctenyrs[df$opportunity25tenyrs == 1]
+  
+  # doiscore26
+  df$doiscore26lifetime <- NA
+  df$doiscore26lifetime[df$opportunity26lifetime == 1] <- df$goodoutcome26lifetime[df$opportunity26lifetime == 1]
+  df$doiscore26tenyrs <- NA
+  df$doiscore26tenyrs[df$opportunity26tenyrs == 1] <- df$goodoutcome26tenyrs[df$opportunity26tenyrs == 1]
+  
+  # doiscore27
+  df$doiscore27lifetime <- df$goodoutcome27lifetime
+  df$doiscore27tenyrs <- df$goodoutcome27tenyrs
+  
+  # doiscore28
+  df$doiscore28lifetime <- df$goodoutcome28lifetime
+  df$doiscore28tenyrs <- df$goodoutcome28tenyrs
+  
+  # doiscore29
+  df$doiscore29lifetime <- df$goodoutcome29lifetime
+  df$doiscore29tenyrs <- df$goodoutcome29tenyrs
+  
+  # doiscore30
+  df$doiscore30lifetime <- df$goodoutcome30lifetime
+  df$doiscore30tenyrs <- df$goodoutcome30tenyrs
+  
+  # doiscore31
+  df$doiscore31lifetime <- df$goodoutcome31lifetime
+  df$doiscore31tenyrs <- df$goodoutcome31tenyrs
+  
+  # doiscore32
+  df$doiscore32lifetime <- df$goodoutcome32lifetime
+  df$doiscore32tenyrs <- df$goodoutcome32tenyrs
+  
+  # doiscore33
+  df$doiscore33lifetime <- df$goodoutcome33lifetime
+  df$doiscore33tenyrs <- df$goodoutcome33tenyrs
+  
+  # doiscore34
+  df$doiscore34lifetime <- df$goodoutcome34lifetime
+  df$doiscore34tenyrs <- df$goodoutcome34tenyrs
+  
+  # doiscore35
+  df$doiscore35lifetime <- df$goodoutcome35lifetime
+  df$doiscore35tenyrs <- df$goodoutcome35tenyrs
+  
+  
+  df[df == 99] <- NA
+  
+  
+  ####mean unweighted DOI scores####
+  
+  
+  df$mean_unweighted_doiscore_lifetime <- rowMeans(df[,c("doiscore1lifetime","doiscore2lifetime","doiscore3lifetime","doiscore4lifetime","doiscore5lifetime","doiscore6lifetime",
+                                                         "doiscore7blifetime","doiscore7clifetime","doiscore7dlifetime","doiscore7elifetime","doiscore7flifetime","doiscore8lifetime","doiscore9lifetime","doiscore10lifetime","doiscore11lifetime",
+                                                         "doiscore12lifetime","doiscore13blifetime","doiscore13clifetime","doiscore14lifetime","doiscore15lifetime","doiscore16lifetime","doiscore17lifetime","doiscore18lifetime",
+                                                         "doiscore19lifetime","doiscore20lifetime","doiscore21lifetime","doiscore22lifetime","doiscore23lifetime","doiscore24lifetime",
+                                                         "doiscore25blifetime","doiscore25clifetime","doiscore26lifetime","doiscore27lifetime","doiscore28lifetime",
+                                                         "doiscore29lifetime","doiscore30lifetime","doiscore31lifetime","doiscore32lifetime","doiscore33lifetime","doiscore34lifetime","doiscore35lifetime")], na.rm = TRUE);
+  
+  
+  df$mean_unweighted_doiscore_tenyrs <- rowMeans(df[,c("doiscore1tenyrs","doiscore2tenyrs","doiscore3tenyrs","doiscore4tenyrs","doiscore5tenyrs","doiscore6tenyrs",
+                                                       "doiscore7btenyrs","doiscore7ctenyrs","doiscore7dtenyrs","doiscore7etenyrs","doiscore7ftenyrs","doiscore8tenyrs","doiscore9tenyrs","doiscore10tenyrs","doiscore11tenyrs",
+                                                       "doiscore12tenyrs","doiscore13btenyrs","doiscore13ctenyrs","doiscore14tenyrs","doiscore15tenyrs","doiscore16tenyrs","doiscore17tenyrs","doiscore18tenyrs",
+                                                       "doiscore19tenyrs","doiscore20tenyrs","doiscore21tenyrs","doiscore22tenyrs","doiscore23tenyrs","doiscore24tenyrs",
+                                                       "doiscore25btenyrs","doiscore25ctenyrs","doiscore26tenyrs","doiscore27tenyrs","doiscore28tenyrs",
+                                                       "doiscore29tenyrs","doiscore30tenyrs","doiscore31tenyrs","doiscore32tenyrs","doiscore33tenyrs","doiscore34tenyrs","doiscore35tenyrs")], na.rm = TRUE);
+  
+  
+  ####Individual weighted DOI scores####
+  
+  df$weighted_doiscore1lifetime = df$doiscore1lifetime*(0.52);
+  df$weighted_doiscore2lifetime = df$doiscore2lifetime*(0.42);
+  df$weighted_doiscore3lifetime = df$doiscore3lifetime*(0.12);
+  df$weighted_doiscore4lifetime = df$doiscore4lifetime*(0.59);
+  df$weighted_doiscore5lifetime = df$doiscore5lifetime*(0.89);
+  df$weighted_doiscore6lifetime = df$doiscore6lifetime*(0.92);
+  df$weighted_doiscore7blifetime = df$doiscore7blifetime*(0.74);
+  df$weighted_doiscore7clifetime = df$doiscore7clifetime*(0.87);
+  df$weighted_doiscore7dlifetime = df$doiscore7dlifetime*(0.95);
+  df$weighted_doiscore7elifetime = df$doiscore7elifetime*(0.38);
+  df$weighted_doiscore7flifetime = df$doiscore7flifetime*(0.32);
+  df$weighted_doiscore8lifetime = df$doiscore8lifetime*(0.71);
+  df$weighted_doiscore9lifetime = df$doiscore9lifetime*(0.80);
+  df$weighted_doiscore10lifetime = df$doiscore10lifetime*(0.86);
+  df$weighted_doiscore11lifetime = df$doiscore11lifetime*(0.72);
+  df$weighted_doiscore12lifetime = df$doiscore12lifetime*(0.91);
+  df$weighted_doiscore13blifetime = df$doiscore13blifetime*(0.75);
+  df$weighted_doiscore13clifetime = df$doiscore13clifetime*(0.51);
+  df$weighted_doiscore14lifetime = df$doiscore14lifetime*(0.89);
+  df$weighted_doiscore15lifetime = df$doiscore15lifetime*(0.88);
+  df$weighted_doiscore16lifetime = df$doiscore16lifetime*(0.73);
+  df$weighted_doiscore17lifetime = df$doiscore17lifetime*(0.58);
+  df$weighted_doiscore18lifetime = df$doiscore18lifetime*(0.45);
+  df$weighted_doiscore19lifetime = df$doiscore19lifetime*(0.90);
+  df$weighted_doiscore20lifetime = df$doiscore20lifetime*(0.31);
+  df$weighted_doiscore21lifetime = df$doiscore21lifetime*(0.77);
+  df$weighted_doiscore22lifetime = df$doiscore22lifetime*(0.53);
+  df$weighted_doiscore23lifetime = df$doiscore23lifetime*(0.90);
+  df$weighted_doiscore24lifetime = df$doiscore24lifetime*(0.70);
+  df$weighted_doiscore25blifetime = df$doiscore25blifetime*(0.48);
+  df$weighted_doiscore25clifetime = df$doiscore25clifetime*(0.94);
+  df$weighted_doiscore26lifetime = df$doiscore26lifetime*(0.48);
+  df$weighted_doiscore27lifetime = df$doiscore27lifetime*(0.79);
+  df$weighted_doiscore28lifetime = df$doiscore28lifetime*(0.73);
+  df$weighted_doiscore29lifetime = df$doiscore29lifetime*(0.81);
+  df$weighted_doiscore30lifetime = df$doiscore30lifetime*(0.24);
+  df$weighted_doiscore31lifetime = df$doiscore31lifetime*(0.76);
+  df$weighted_doiscore32lifetime = df$doiscore32lifetime*(0.60);
+  df$weighted_doiscore33lifetime = df$doiscore33lifetime*(0.72);
+  df$weighted_doiscore34lifetime = df$doiscore34lifetime*(0.30);
+  df$weighted_doiscore35lifetime = df$doiscore35lifetime*(0.88);
+  
+  
+  df$weighted_doiscore1tenyrs = df$doiscore1tenyrs*(0.48);
+  df$weighted_doiscore2tenyrs = df$doiscore2tenyrs*(0.51);
+  df$weighted_doiscore3tenyrs = df$doiscore3tenyrs*(0.12);
+  df$weighted_doiscore4tenyrs = df$doiscore4tenyrs*(0.75);
+  df$weighted_doiscore5tenyrs = df$doiscore5tenyrs*(0.98);
+  df$weighted_doiscore6tenyrs = df$doiscore6tenyrs*(0.96);
+  df$weighted_doiscore7btenyrs = df$doiscore7btenyrs*(0.86);
+  df$weighted_doiscore7ctenyrs = df$doiscore7ctenyrs*(0.95);
+  df$weighted_doiscore7dtenyrs = df$doiscore7dtenyrs*(1.0);
+  df$weighted_doiscore7etenyrs = df$doiscore7etenyrs*(0.50);
+  df$weighted_doiscore7ftenyrs = df$doiscore7ftenyrs*(0.60);
+  df$weighted_doiscore8tenyrs = df$doiscore8tenyrs*(0.79);
+  df$weighted_doiscore9tenyrs = df$doiscore9tenyrs*(0.92);
+  df$weighted_doiscore10tenyrs = df$doiscore10tenyrs*(0.88);
+  df$weighted_doiscore11tenyrs = df$doiscore11tenyrs*(0.79);
+  df$weighted_doiscore12tenyrs = df$doiscore12tenyrs*(0.96);
+  df$weighted_doiscore13btenyrs = df$doiscore13btenyrs*(0.85);
+  df$weighted_doiscore13ctenyrs = df$doiscore13ctenyrs*(0.65);
+  df$weighted_doiscore14tenyrs = df$doiscore14tenyrs*(0.92);
+  df$weighted_doiscore15tenyrs = df$doiscore15tenyrs*(0.89);
+  df$weighted_doiscore16tenyrs = df$doiscore16tenyrs*(0.83);
+  df$weighted_doiscore17tenyrs = df$doiscore17tenyrs*(0.74);
+  df$weighted_doiscore18tenyrs = df$doiscore18tenyrs*(0.57);
+  df$weighted_doiscore19tenyrs = df$doiscore19tenyrs*(0.97);
+  df$weighted_doiscore20tenyrs = df$doiscore20tenyrs*(0.40);
+  df$weighted_doiscore21tenyrs = df$doiscore21tenyrs*(0.89);
+  df$weighted_doiscore22tenyrs = df$doiscore22tenyrs*(0.75);
+  df$weighted_doiscore23tenyrs = df$doiscore23tenyrs*(0.98);
+  df$weighted_doiscore24tenyrs = df$doiscore24tenyrs*(0.81);
+  df$weighted_doiscore25btenyrs = df$doiscore25btenyrs*(0.85);
+  df$weighted_doiscore25ctenyrs = df$doiscore25ctenyrs*(0.98);
+  df$weighted_doiscore26tenyrs = df$doiscore26tenyrs*(0.84);
+  df$weighted_doiscore27tenyrs = df$doiscore27tenyrs*(0.94);
+  df$weighted_doiscore28tenyrs = df$doiscore28tenyrs*(0.93);
+  df$weighted_doiscore29tenyrs = df$doiscore29tenyrs*(0.85);
+  df$weighted_doiscore30tenyrs = df$doiscore30tenyrs*(0.36);
+  df$weighted_doiscore31tenyrs = df$doiscore31tenyrs*(0.81);
+  df$weighted_doiscore32tenyrs = df$doiscore32tenyrs*(0.63);
+  df$weighted_doiscore33tenyrs = df$doiscore33tenyrs*(0.76);
+  df$weighted_doiscore34tenyrs = df$doiscore34tenyrs*(0.19);
+  df$weighted_doiscore35tenyrs = df$doiscore35tenyrs*(0.97);
+  
+  
+  ####mean Weighted DOI scores####
+  
+  df$mean_weighted_doiscore_lifetime <- rowMeans(df[,c("weighted_doiscore1lifetime","weighted_doiscore2lifetime","weighted_doiscore3lifetime","weighted_doiscore4lifetime","weighted_doiscore5lifetime","weighted_doiscore6lifetime",
+                                                       "weighted_doiscore7blifetime","weighted_doiscore7clifetime","weighted_doiscore7dlifetime","weighted_doiscore7elifetime","weighted_doiscore7flifetime","weighted_doiscore8lifetime","weighted_doiscore9lifetime","weighted_doiscore10lifetime","weighted_doiscore11lifetime",
+                                                       "weighted_doiscore12lifetime","weighted_doiscore13blifetime","weighted_doiscore13clifetime","weighted_doiscore14lifetime","weighted_doiscore15lifetime","weighted_doiscore16lifetime","weighted_doiscore17lifetime","weighted_doiscore18lifetime",
+                                                       "weighted_doiscore19lifetime","weighted_doiscore20lifetime","weighted_doiscore21lifetime","weighted_doiscore22lifetime","weighted_doiscore23lifetime","weighted_doiscore24lifetime",
+                                                       "weighted_doiscore25blifetime","weighted_doiscore25clifetime","weighted_doiscore26lifetime","weighted_doiscore27lifetime","weighted_doiscore28lifetime",
+                                                       "weighted_doiscore29lifetime","weighted_doiscore30lifetime","weighted_doiscore31lifetime","weighted_doiscore32lifetime","weighted_doiscore33lifetime","weighted_doiscore34lifetime","weighted_doiscore35lifetime")], na.rm = TRUE);
+  
+  
+  df$mean_weighted_doiscore_tenyrs <- rowMeans(df[,c("weighted_doiscore1tenyrs","weighted_doiscore2tenyrs","weighted_doiscore3tenyrs","weighted_doiscore4tenyrs","weighted_doiscore5tenyrs","weighted_doiscore6tenyrs",
+                                                     "weighted_doiscore7btenyrs","weighted_doiscore7ctenyrs","weighted_doiscore7dtenyrs","weighted_doiscore7etenyrs","weighted_doiscore7ftenyrs","weighted_doiscore8tenyrs","weighted_doiscore9tenyrs","weighted_doiscore10tenyrs","weighted_doiscore11tenyrs",
+                                                     "weighted_doiscore12tenyrs","weighted_doiscore13btenyrs","weighted_doiscore13ctenyrs","weighted_doiscore14tenyrs","weighted_doiscore15tenyrs","weighted_doiscore16tenyrs","weighted_doiscore17tenyrs","weighted_doiscore18tenyrs",
+                                                     "weighted_doiscore19tenyrs","weighted_doiscore20tenyrs","weighted_doiscore21tenyrs","weighted_doiscore22tenyrs","weighted_doiscore23tenyrs","weighted_doiscore24tenyrs",
+                                                     "weighted_doiscore25btenyrs","weighted_doiscore25ctenyrs","weighted_doiscore26tenyrs","weighted_doiscore27tenyrs","weighted_doiscore28tenyrs",
+                                                     "weighted_doiscore29tenyrs","weighted_doiscore30tenyrs","weighted_doiscore31tenyrs","weighted_doiscore32tenyrs","weighted_doiscore33tenyrs","weighted_doiscore34tenyrs","weighted_doiscore35tenyrs")], na.rm = TRUE)
+  
+  
+  return(df)
+}
+
+#scs scoring
+score.scs<- function(df=NULL){
+  df<-df %>% mutate_at(vars(paste0("scs_",c(1:20))),as.numeric)%>%
+    mutate (scs_7r=7-scs_7,scs_9r=7-scs_9,scs_11r=7-scs_11, scs_12r=7-scs_12,scs_13r=7-scs_13, scs_14r=7-scs_14, scs_16r=7-scs_16, scs_17r=7-scs_17,
+            scs_19r=7-scs_19, scs_20r=7-scs_20)
+  
+  df <-df %>%
+    mutate (rrs_total=ifelse(rowSums(is.na(df[paste0("scs_",c(1:6,"7r",8,"9r",10,"11r","12r","13r","14r",15,"16r","17r",18,"19r","20r"))]))==0,
+                             rowSums(df[paste0("scs_",c(1:6,"7r",8,"9r",10,"11r","12r","13r","14r",15,"16r","17r",18,"19r","20r"))]),ifelse(
+                               rowSums(is.na(df[paste0("scs_",c(1:6,"7r",8,"9r",10,"11r","12r","13r","14r",15,"16r","17r",18,"19r","20r"))]))==1,
+                               round(rowSums(df[paste0("scs_",c(1:6,"7r",8,"9r",10,"11r","12r","13r","14r",15,"16r","17r",18,"19r","20r"))],na.rm=T)*20/19),ifelse(
+                                 rowSums(is.na(df[paste0("scs_",c(1:6,"7r",8,"9r",10,"11r","12r","13r","14r",15,"16r","17r",18,"19r","20r"))]))==2,
+                                 round(rowSums(df[paste0("scs_",c(1:6,"7r",8,"9r",10,"11r","12r","13r","14r",15,"16r","17r",18,"19r","20r"))],na.rm=T)*20/18),NA))))
+  return(df)
+}
+
+#sas scoring
+score.sas<- function(df=NULL){
+  df<-df %>% mutate_at(vars(paste0("sas_",c(1:8))),as.numeric)
+  
+  df <-df %>%
+    mutate (rrs_total=ifelse(rowSums(is.na(df[paste0("sas_",c(1:8))]))==0,
+                             rowSums(df[paste0("sas_",c(1:8))]),NA))
+  return(df)
+}
+
+#uclals scoring
+score.uclals<- function(df=NULL){
+  df<-df %>% mutate_at(vars(paste0("uclals_",c(1:20))),as.numeric)%>%
+    mutate (uclals_1r=5-uclals_1, uclals_5r=5-uclals_5, uclals_6r=5-uclals_6, uclals_9r=5-uclals_9,uclals_10r=5-uclals_10, uclals_15r=5-uclals_15, uclals_16r=5-uclals_16,
+            uclals_19r=5-uclals_19, uclals_20r=5-uclals_20)
+  
+  df <-df %>%
+    mutate (uclals_total=ifelse(rowSums(is.na(df[paste0("uclals_",c("1r",2:4,"5r","6r",7,8,"9r","10r",11:14,"15r","16r",17,18,"19r","20r"))]))==0,
+                             rowSums(df[paste0("uclals_",c("1r",2:4,"5r","6r",7,8,"9r","10r",11:14,"15r","16r",17,18,"19r","20r"))]),ifelse(
+                               rowSums(is.na(df[paste0("uclals_",c("1r",2:4,"5r","6r",7,8,"9r","10r",11:14,"15r","16r",17,18,"19r","20r"))]))==1,
+                               round(rowSums(df[paste0("uclals_",c("1r",2:4,"5r","6r",7,8,"9r","10r",11:14,"15r","16r",17,18,"19r","20r"))],na.rm=T)*20/19),ifelse(
+                                 rowSums(is.na(df[paste0("uclals_",c("1r",2:4,"5r","6r",7,8,"9r","10r",11:14,"15r","16r",17,18,"19r","20r"))]))==2,
+                                 round(rowSums(df[paste0("uclals_",c("1r",2:4,"5r","6r",7,8,"9r","10r",11:14,"15r","16r",17,18,"19r","20r"))],na.rm=T)*20/18),NA))))
+  return(df)
+}
+
 

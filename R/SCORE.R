@@ -1095,10 +1095,10 @@ score.ius<- function(df=NULL){
                             rowSums(df[paste0("ius_",c(1, 2, 3, 9, 12, 13, 14, 15, 16, 17, 20, 22, 23, 24, 25))]),ifelse(
                               rowSums(is.na(df[paste0("ius_",c(1, 2, 3, 9, 12, 13, 14, 15, 16, 17, 20, 22, 23, 24, 25))]))==1,
                               round(rowSums(df[paste0("ius_",c(1, 2, 3, 9, 12, 13, 14, 15, 16, 17, 20, 22, 23, 24, 25))],na.rm=T)*15/14),NA)),
-            ius_fac2=ifelse(rowSums(is.na(df[paste0("icg_",c(4, 5, 6, 7, 8, 10, 11, 18, 19, 21, 26,27))]))==0,
-                            rowSums(df[paste0("icg_",c(4, 5, 6, 7, 8, 10, 11, 18, 19, 21, 26,27))]),ifelse(
-                              rowSums(is.na(df[paste0("icg_",c(4, 5, 6, 7, 8, 10, 11, 18, 19, 21, 26,27))]))==1,
-                              round(rowSums(df[paste0("icg_",c(4, 5, 6, 7, 8, 10, 11, 18, 19, 21, 26,27))],na.rm=T)*12/11),NA)))
+            ius_fac2=ifelse(rowSums(is.na(df[paste0("ius_",c(4, 5, 6, 7, 8, 10, 11, 18, 19, 21, 26,27))]))==0,
+                            rowSums(df[paste0("ius_",c(4, 5, 6, 7, 8, 10, 11, 18, 19, 21, 26,27))]),ifelse(
+                              rowSums(is.na(df[paste0("ius_",c(4, 5, 6, 7, 8, 10, 11, 18, 19, 21, 26,27))]))==1,
+                              round(rowSums(df[paste0("ius_",c(4, 5, 6, 7, 8, 10, 11, 18, 19, 21, 26,27))],na.rm=T)*12/11),NA)))
   return(df)
 }
 

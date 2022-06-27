@@ -1014,7 +1014,7 @@ score.ffni <- function(df=NULL){
                                     rowSums(df[paste0("ffni_", c(13,28,43,58))]),NA),
             ffni_shame = ifelse(rowSums(is.na(df[paste0("ffni_", c(14,29,44,59))]))==0, 
                                rowSums(df[paste0("ffni_", c(14,29,44,59))]),NA),
-            ffni_thrill = ifelse(rowSums(is.na(df[paste0("ffni_", c(15,30,45,60)))]))==0, 
+            ffni_thrill = ifelse(rowSums(is.na(df[paste0("ffni_", c(15,30,45,60))]))==0, 
                                   rowSums(df[paste0("ffni_", c(15,30,45,60))]),NA))
 
 df <-df %>%

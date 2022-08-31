@@ -1155,18 +1155,6 @@ score.pid5 <- function(df=NULL){
 
 #mfq scoring
 score.mfq <- function(df=NULL){
-  mfq_vars1<-paste0("mfq_",c('2a','2b','2c','2d','2e','2f','2g','2h','2i','2j','2k','2l','2m','2n','2o','2p','2q','2r'))
-  mfq_vars2<-paste0("mfq_",c('3a','3b','3c','3d','3e'))
-  mfq_vars3<-paste0("mfq_",c('4a','4b','4c','4d','4e'))
-  mfq_vars4<-paste0("mfq_",c('5a','5b','5c','5d'))
-  mfq_vars5<-paste0("mfq_",c('6a','6b','6c','6d','6e','6f','6g','6h','6i','6j','6k','6l','6m','6n','6o','6p','6q','6r'))
-  mfq_vars6<-paste0("mfq_",c('7a','7b','7c','7d','7e'))
-  mfq_vars7<-paste0("mfq_",c('8a','8b','8c','8d','8e','8f','8g','8h'))
-  
-  df<-df %>% mutate_at(vars(drs_vars1),as.numeric)%>% mutate_at(vars(drs_vars2),as.numeric)%>% mutate_at(vars(drs_vars3),as.numeric)%>% 
-    mutate_at(vars(drs_vars4),as.numeric)%>% mutate_at(vars(drs_vars5),as.numeric)%>% mutate_at(vars(drs_vars6),as.numeric)%>% mutate_at(vars(drs_vars7),as.numeric)
-  
-  
   df <-df %>%
     mutate (mfq_gen_forget=ifelse(rowSums(is.na(df[paste0("mfq_", c('2a','2b','2c','2d','2e','2f','2g','2h','2i','2j','2k','2l','2m','2n','2o','2p','2q','2r','3a','3b','3c','3d','3e','4a','4b','4c','4d','4e','5a','5b','5c','5d'))]))==0, 
                                          rowSums(df[paste0("mfq_", c('2a','2b','2c','2d','2e','2f','2g','2h','2i','2j','2k','2l','2m','2n','2o','2p','2q','2r','3a','3b','3c','3d','3e','4a','4b','4c','4d','4e','5a','5b','5c','5d'))]),

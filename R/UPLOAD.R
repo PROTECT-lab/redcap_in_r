@@ -234,11 +234,11 @@ redcap_oneshot_upload<-function (ds, redcap_uri, token, verbose = TRUE, NAoverwr
       allgx<-lapply(sp_rawtext,function(x){xa<-strsplit(gsub("\"","",x),",")[[1]];})
       mxID<-sapply(allgx,function(sp_rawtext){gsub("ERROR: ","",sp_rawtext[1])})
       allIDs<-c(previousIDs,mxID)
-      negPos<-as.numeric(na.omit(sapply(allIDs,function(IDX){
+      negPos<-as.numeric(unlist(na.omit(sapply(allIDs,function(IDX){
         #print(IDX)
         a<-unique(which(ds==IDX,arr.ind = T)[,1]);
         if(length(a)>0){a}else{NA}
-      })))
+      }))))
       ds_new<-ds[-negPos,]
       gx<-redcap_oneshot_upload(ds = ds_new, redcap_uri = redcap_uri, token = token, verbose = verbose, 
                                 retry_whenfailed = T,previousIDs = allIDs,

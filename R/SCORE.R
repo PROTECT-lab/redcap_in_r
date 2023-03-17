@@ -236,17 +236,17 @@ score.drs<-function(df=NULL){
                             'ac','ad','ae','af','ag','ah','ai','aj','ak'))
   df<-df %>% mutate_at(vars(drs_vars),as.numeric)
   df<-df %>% mutate(
-    drs_attention=rowSums(df[paste0("drs_",c('a','b','c','d','ad','ae','ah','aj'))]),
+    drs_attention=rowSums(df[paste0("drs_",c('a','b','c','d','ad','ae','ah','aj'))], na.rm=T),
     
-    drs_initandpers=rowSums(df[paste0("drs_",c('e','f','g','h','i','j','k','l','m','n','o'))]),
+    drs_initandpers=rowSums(df[paste0("drs_",c('e','f','g','h','i','j','k','l','m','n','o'))], na.rm=T),
     
-    drs_construction=rowSums(df[paste0("drs_",c('p','q','r','s','t','u'))]),
+    drs_construction=rowSums(df[paste0("drs_",c('p','q','r','s','t','u'))], na.rm=T),
     
-    drs_conceptualization=rowSums(df[paste0("drs_",c('v','w','x','y','z','ab'))]),
+    drs_conceptualization=rowSums(df[paste0("drs_",c('v','w','x','y','z','ab'))], na.rm=T),
     
-    drs_memory=rowSums(df[paste0("drs_",c('ac','af','ag','ai','ak'))]),
+    drs_memory=rowSums(df[paste0("drs_",c('ac','af','ag','ai','ak'))], na.rm=T),
     
-    drs_total=rowSums(df[drs_vars])
+    drs_total=rowSums(df[drs_vars], na.rm=T)
   )
   return(df)
 }

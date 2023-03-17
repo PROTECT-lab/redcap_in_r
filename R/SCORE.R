@@ -236,17 +236,27 @@ score.drs<-function(df=NULL){
                             'ac','ad','ae','af','ag','ah','ai','aj','ak'))
   df<-df %>% mutate_at(vars(drs_vars),as.numeric)
   df<-df %>% mutate(
-    drs_attention=rowSums(df[paste0("drs_",c('a','b','c','d','ad','ae','ah','aj'))], na.rm=T),
+    drs_attention=ifelse(rowSums(is.na(df[paste0("drs_",c('a','b','c','d','ad','ae','ah','aj'))]))==0,
+                         rowSums(df[paste0("drs_",c('a','b','c','d','ad','ae','ah','aj'))]),
+                         NA),
     
-    drs_initandpers=rowSums(df[paste0("drs_",c('e','f','g','h','i','j','k','l','m','n','o'))], na.rm=T),
+    drs_initandpers=ifelse(rowSums(is.na(df[paste0("drs_",c('e','f','g','h','i','j','k','l','m','n','o'))]))==0,
+                           rowSums(df[paste0("drs_",c('e','f','g','h','i','j','k','l','m','n','o'))]),
+                           NA),
     
-    drs_construction=rowSums(df[paste0("drs_",c('p','q','r','s','t','u'))], na.rm=T),
+    drs_construction=ifelse(rowSums(is.na(df[paste0("drs_",c('p','q','r','s','t','u'))]))==0,
+                            rowSums(df[paste0("drs_",c('p','q','r','s','t','u'))]),
+                            NA),
     
-    drs_conceptualization=rowSums(df[paste0("drs_",c('v','w','x','y','z','ab'))], na.rm=T),
+    drs_conceptualization=ifelse(rowSums(is.na(df[paste0("drs_",c('v','w','x','y','z','ab'))]))==0,
+                                 rowSums(df[paste0("drs_",c('v','w','x','y','z','ab'))]),
+                                 NA),
     
-    drs_memory=rowSums(df[paste0("drs_",c('ac','af','ag','ai','ak'))], na.rm=T),
+    drs_memory=ifelse(rowSums(is.na(df[paste0("drs_",c('ac','af','ag','ai','ak'))]))==0,
+                      rowSums(df[paste0("drs_",c('ac','af','ag','ai','ak'))]),
+                      NA),
     
-    drs_total=rowSums(df[drs_vars], na.rm=T)
+    drs_total=ifelse(rowSums(is.na(df))==0, rowSums(df[drs_vars]),NA)
   )
   return(df)
 }

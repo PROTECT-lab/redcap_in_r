@@ -236,22 +236,17 @@ score.drs<-function(df=NULL){
                             'ac','ad','ae','af','ag','ah','ai','aj','ak'))
   df<-df %>% mutate_at(vars(drs_vars),as.numeric)
   df<-df %>% mutate(
-    drs_attention=ifelse(rowSums(is.na(df[paste0("drs_",c('a','b','c','d','ad','ae','ah','aj'))]))==0,
-                         rowSums(df[paste0("drs_",c('a','b','c','d','ad','ae','ah','aj'))]),NA),
-    drs_initandpers=ifelse(rowSums(is.na(df[paste0("drs_",c('e','f','g','h','i','j','k','l','m','n','o'))]))==0,
-                           rowSums(df[paste0("drs_",c('e','f','g','h','i','j','k','l','m','n','o'))]),ifelse(
-                             rowSums(is.na(df[paste0("drs_",c('e','f','g','h','i','j','k','l','m','n','o'))]))==1,
-                             round(rowSums(df[paste0("drs_",c('e','f','g','h','i','j','k','l','m','n','o'))],na.rm=T)*11/10),NA)),
-    drs_construction=ifelse(rowSums(is.na(df[paste0("drs_",c('p','q','r','s','t','u'))]))==0,
-                            rowSums(df[paste0("drs_",c('p','q','r','s','t','u'))]),NA),
-    drs_conceptualization=ifelse(rowSums(is.na(df[paste0("drs_",c('v','w','x','y','z','ab'))]))==0,
-                                 rowSums(df[paste0("drs_",c('v','w','x','y','z','ab'))]),NA),
-    drs_memory=ifelse(rowSums(is.na(df[paste0("drs_",c('ac','af','ag','ai','ak'))]))==0,
-                      rowSums(df[paste0("drs_",c('ac','af','ag','ai','ak'))]),NA),
-    drs_total=ifelse(rowSums(is.na(df))==0, rowSums(df[drs_vars]),ifelse(
-      rowSums(is.na(df))==1, round(rowSums(df[drs_vars],na.rm=T)*36/35),ifelse(
-        rowSums(is.na(df))==2,round(rowSums(df[drs_vars],na.rm=T)*36/34),ifelse(
-          rowSums(is.na(df))==3,round(rowSums(df[drs_vars],na.rm=T)*36/33),NA))))
+    drs_attention=rowSums(df[paste0("drs_",c('a','b','c','d','ad','ae','ah','aj'))]),
+    
+    drs_initandpers=rowSums(df[paste0("drs_",c('e','f','g','h','i','j','k','l','m','n','o'))]),
+    
+    drs_construction=rowSums(df[paste0("drs_",c('p','q','r','s','t','u'))]),
+    
+    drs_conceptualization=rowSums(df[paste0("drs_",c('v','w','x','y','z','ab'))]),
+    
+    drs_memory=rowSums(df[paste0("drs_",c('ac','af','ag','ai','ak'))]),
+    
+    drs_total=rowSums(df[drs_vars])
   )
   return(df)
 }
@@ -1170,7 +1165,7 @@ score.mfq <- function(df=NULL){
                                             rowSums(df[paste0("mfq_", c('6a','6b','6c','6d','6e','6f','6g','6h','6i','6j','6k','6l','6m','6n','6o','6p','6q','6r'))])*18/17, NA)),
             mfq_retro_function=ifelse(rowSums(is.na(df[paste0("mfq_", c('7a','7b','7c','7d','7e'))]))==0, 
                                      rowSums(df[paste0("mfq_", c('7a','7b','7c','7d','7e'))]), NA),
-            mfq_disinhibition_s=ifelse(rowSums(is.na(df[paste0("mfq_", c('8a','8b','8c','8d','8e','8f','8g','8h'))]))==0, 
+            mfq_mnemonics=ifelse(rowSums(is.na(df[paste0("mfq_", c('8a','8b','8c','8d','8e','8f','8g','8h'))]))==0, 
                                         rowSums(df[paste0("mfq_", c('8a','8b','8c','8d','8e','8f','8g','8h'))]),NA))
   
   return(df)

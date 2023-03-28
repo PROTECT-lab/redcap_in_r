@@ -256,7 +256,7 @@ score.drs<-function(df=NULL){
                       rowSums(df[paste0("drs_",c('ac','af','ag','ai','ak'))]),
                       NA),
     
-    drs_total=ifelse(rowSums(is.na(df[drs_vars]))==0, rowSums(df[drs_vars]),NA)
+    drs_total=ifelse(rowSums(is.na(df[drs_vars])) < 4, rowSums(df[drs_vars]), NA)
   )
   return(df)
 }

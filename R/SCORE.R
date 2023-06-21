@@ -1807,7 +1807,7 @@ score.scs<- function(df=NULL){
             scs_19r=7-scs_19, scs_20r=7-scs_20)
   
   df <-df %>%
-    mutate (rrs_total=ifelse(rowSums(is.na(df[paste0("scs_",c(1:6,"7r",8,"9r",10,"11r","12r","13r","14r",15,"16r","17r",18,"19r","20r"))]))==0,
+    mutate (scs_total=ifelse(rowSums(is.na(df[paste0("scs_",c(1:6,"7r",8,"9r",10,"11r","12r","13r","14r",15,"16r","17r",18,"19r","20r"))]))==0,
                              rowSums(df[paste0("scs_",c(1:6,"7r",8,"9r",10,"11r","12r","13r","14r",15,"16r","17r",18,"19r","20r"))]),ifelse(
                                rowSums(is.na(df[paste0("scs_",c(1:6,"7r",8,"9r",10,"11r","12r","13r","14r",15,"16r","17r",18,"19r","20r"))]))==1,
                                round(rowSums(df[paste0("scs_",c(1:6,"7r",8,"9r",10,"11r","12r","13r","14r",15,"16r","17r",18,"19r","20r"))],na.rm=T)*20/19),ifelse(

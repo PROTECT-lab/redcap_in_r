@@ -401,14 +401,33 @@ score.iip<-function(df=NULL){
 score.neo<-function(df=NULL){
   df<-df %>% mutate_at(vars(paste0("neoffi_",1:60)),as.numeric)
   df<-df %>% mutate(
-    neoffi_1r=6-neoffi_1,neoffi_3r=6-neoffi_3,neoffi_8r=6-neoffi_8, neoffi_9r=6-neoffi_9,
-    neoffi_12r=6-neoffi_12, neoffi_14r=6-neoffi_14, neoffi_15r=6-neoffi_15,
-    neoffi_16r=6-neoffi_16, neoffi_18r=6-neoffi_18, neoffi_23r=6-neoffi_23,
-    neoffi_24r=6-neoffi_24, neoffi_27r=6-neoffi_27, neoffi_29r=6-neoffi_29,
-    neoffi_30r=6-neoffi_30, neoffi_31r=6-neoffi_31, neoffi_38r=6-neoffi_38,
-    neoffi_39r=6-neoffi_39, neoffi_42r=6-neoffi_42, neoffi_44r=6-neoffi_44,
-    neoffi_45r=6-neoffi_45, neoffi_46r=6-neoffi_46, neoffi_48r=6-neoffi_48,
-    neoffi_54r=6-neoffi_54, neoffi_55r=6-neoffi_55, neoffi_57r=6-neoffi_57,
+    neoffi_1r=6-neoffi_1,
+    neoffi_3r=6-neoffi_3,
+    neoffi_8r=6-neoffi_8, 
+    neoffi_9r=6-neoffi_9,
+    neoffi_12r=6-neoffi_12, 
+    neoffi_14r=6-neoffi_14, 
+    neoffi_15r=6-neoffi_15,
+    neoffi_16r=6-neoffi_16, 
+    neoffi_18r=6-neoffi_18, 
+    neoffi_23r=6-neoffi_23,
+    neoffi_24r=6-neoffi_24, 
+    neoffi_27r=6-neoffi_27, 
+    neoffi_28r=6-neoffi_28,
+    neoffi_29r=6-neoffi_29,
+    neoffi_30r=6-neoffi_30, 
+    neoffi_31r=6-neoffi_31, 
+    neoffi_33r=6-neoffi_33,
+    neoffi_38r=6-neoffi_38,
+    neoffi_39r=6-neoffi_39, 
+    neoffi_42r=6-neoffi_42, 
+    neoffi_44r=6-neoffi_44,
+    neoffi_45r=6-neoffi_45, 
+    neoffi_46r=6-neoffi_46, 
+    neoffi_48r=6-neoffi_48,
+    neoffi_54r=6-neoffi_54, 
+    neoffi_55r=6-neoffi_55, 
+    neoffi_57r=6-neoffi_57,
     neoffi_59r=6-neoffi_59) #Changed all scoring to 6 minus
   #Scoring
   df<-df %>% mutate(
@@ -420,10 +439,10 @@ score.neo<-function(df=NULL){
                             rowSums(df[paste0("neoffi_",c(7,'12r',37,'42r',2,17,'27r','57r',22,32,47,52))]),ifelse(
                               rowSums(is.na(df[paste0("neoffi_",c(7,'12r',37,'42r',2,17,'27r','57r',22,32,47,52))]))==1,
                               round(rowSums(df[paste0("neoffi_",c(7,'12r',37,'42r',2,17,'27r','57r',22,32,47,52))],na.rm=T)*12/11),NA)),
-    neo_openness=ifelse(rowSums(is.na(df[paste0("neoffi_",c(13,'23r',43,'48r',53,58,'3r','8r','18r','38r'))]))==0,
-                        rowSums(df[paste0("neoffi_",c(13,'23r',43,'48r',53,58,'3r','8r','18r','38r'))]),ifelse(
-                          rowSums(is.na(df[paste0("neoffi_",c(13,'23r',43,'48r',53,58,'3r','8r','18r','38r'))]))==1,
-                          round(rowSums(df[paste0("neoffi_",c(13,'23r',43,'48r',53,58,'3r','8r','18r','38r'))],na.rm=T)*10/9),NA)),
+    neo_openness=ifelse(rowSums(is.na(df[paste0("neoffi_",c(13,'23r',43,'48r',53, 58,'3r','8r','18r','38r','28r','33r'))]))==0,
+                        rowSums(df[paste0("neoffi_",c(13,'23r',43,'48r',53,58,'3r','8r','18r','38r','28r','33r'))]),ifelse(
+                          rowSums(is.na(df[paste0("neoffi_",c(13,'23r',43,'48r',53,58,'3r','8r','18r','38r','28r','33r'))]))==1,
+                          round(rowSums(df[paste0("neoffi_",c(13,'23r',43,'48r',53,58,'3r','8r','18r','38r','28r','33r'))],na.rm=T)*12/11),NA)),
     neo_agreeableness=ifelse(rowSums(is.na(df[paste0("neoffi_",c('9r','14r',19,'24r','29r','44r','54r','59r',4,34,'39r',49))]))==0,
                              rowSums(df[paste0("neoffi_",c('9r','14r',19,'24r','29r','44r','54r','59r',4,34,'39r',49))]),ifelse(
                                rowSums(is.na(df[paste0("neoffi_",c('9r','14r',19,'24r','29r','44r','54r','59r',4,34,'39r',49))]))==1,

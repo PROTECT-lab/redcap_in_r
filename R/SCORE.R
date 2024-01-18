@@ -3,8 +3,9 @@ bsrc.score<-function(df=NULL,formname=NULL,...){
   library(dplyr)
   possible_forms<-c("ssi","sis","athf","ham","cirsg","sidp","exit","drs","wtar","mmse","ars",
                     "bis","ctq","isel","iip","ta","neo","paibor","spsi","ssd","uppsp","fs", "let", 
-                    "swls","maas","ah","bsia","cfcs", "ders", "iri", "nfc", "rand12", "bpni" ,"bhs","ipipds",
-                    "bipa","dws","es","ffni","icg","ius","narq","pid5","mfq","rrs","sm", "doi","scs", "sas","uclals")
+                    "swls","maas","ah","bsia","cfcs", "ders", "iri", "nfc", "rand12", "bpni" ,"bhs",
+                    "ipipds", "bipa","dws","es","ffni","icg","ius","narq","pid5","mfq","rrs","sm", 
+                    "doi","scs", "sas","uclals", "pg13r")
   if(is.null(formname)){
     message("No form name supplied, choose one of these options:")
     print(possible_forms)
@@ -1860,5 +1861,29 @@ score.uclals<- function(df=NULL){
                                  round(rowSums(df[paste0("uclals_",c("1r",2:4,"5r","6r",7,8,"9r","10r",11:14,"15r","16r",17,18,"19r","20r"))],na.rm=T)*20/18),NA))))
   return(df)
 }
+
+
+
+#dws scoring
+score.pg13r <- function(df=NULL){
+  df<-df %>% mutate_at(vars(paste0("pg13r_",c(1:10))),as.numeric)
+  
+  df <-df %>%
+    mutate (pg13r_total=ifelse(rowSums(is.na(df[paste0("pg13r_",c(1:10))]))==0,
+                             rowSums(df[paste0("pg13r_",c(1:10))]),ifelse(
+                               rowSums(is.na(df[paste0("pg13r_",c(1:10))]))==1,
+                               round(rowSums(df[paste0("pg13r_",c(1:10))],na.rm=T)*10/9),NA)))
+  return(df)
+}
+
+
+
+
+
+
+
+
+
+
 
 

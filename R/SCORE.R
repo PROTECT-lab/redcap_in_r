@@ -1171,7 +1171,7 @@ score.pid5 <- function(df=NULL){
                                             rowSums(df[paste0("pid5_", c(47,64,68,76,2,5,6,8,39,49,55,91,"33r","42r","83r","89r",13,16,21,67))])*20/19,
                                             ifelse(rowSums(is.na(df[paste0("pid5_", c(47,64,68,76,2,5,6,8,39,49,55,91,"33r","42r","83r","89r",13,16,21,67))]))==2,
                                                    rowSums(df[paste0("pid5_", c(47,64,68,76,2,5,6,8,39,49,55,91,"33r","42r","83r","89r",13,16,21,67))])*20/18, NA))),
-            pid5_disinhibition_s=ifelse(rowSums(is.na(df[paste0("pid5_", c(34,54,59,96,10,22,61,94,15,63,88,98))]))==0, 
+            pid5_psychoticism_s=ifelse(rowSums(is.na(df[paste0("pid5_", c(34,54,59,96,10,22,61,94,15,63,88,98))]))==0, 
                                         rowSums(df[paste0("pid5_", c(34,54,59,96,10,22,61,94,15,63,88,98))]),
                                         ifelse(rowSums(is.na(df[paste0("pid5_", c(34,54,59,96,10,22,61,94,15,63,88,98))]))==1, 
                                                rowSums(df[paste0("pid5_", c(34,54,59,96,10,22,61,94,15,63,88,98))])*12/11, NA)))
